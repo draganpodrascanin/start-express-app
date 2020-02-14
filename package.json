@@ -1,0 +1,34 @@
+{
+  "name": "start-express-app",
+  "version": "1.0.0",
+  "description": "Creating a starting point for express app.",
+  "main": "cli.js",
+  "bin": {
+    "start-express-app": "create-project.js"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/draganpodrascanin/start-express-app.git"
+  },
+  "keywords": [
+    "create",
+    "start",
+    "express",
+    "app",
+    "new",
+    "project",
+    "nodejs",
+    "node"
+  ],
+  "author": "Dragan Podrascanin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/draganpodrascanin/start-express-app/issues"
+  },
+  "homepage": "https://github.com/draganpodrascanin/start-express-app#readme"
+}
