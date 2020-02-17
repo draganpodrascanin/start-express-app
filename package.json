@@ -1,12 +1,16 @@
 {
   "name": "start-express-app",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Creating a starting point for express app.",
-  "main": "cli.js",
+  "main": "src/cli.js",
   "bin": {
-    "start-express-app": "create-project.js"
+    "~draganpodrascanin/start-express-app": "bin/create-project.js",
+    "start-express-app": "bin/create-project.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "esm": "^3.2.25",
+    "yargs": "^15.1.0"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

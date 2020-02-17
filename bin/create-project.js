@@ -1,4 +1,11 @@
-#!src/dev/bin node
+#!/usr/bin/env node
 
-require('esm')(module/*, options*/);
-require('../cli').cli(options);
+const argv = require('yargs').argv
+
+console.log(argv)
+
+const esm = require('esm');
+esm(module/*, options*/);
+
+const cli = require('../src/cli');
+cli(argv);
