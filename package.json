@@ -4,10 +4,11 @@
   "description": "Creating a starting point for express app.",
   "main": "src/cli.js",
   "bin": {
-    "~draganpodrascanin/start-express-app": "bin/create-project.js",
+    "@draganpodrascanin/start-express-app": "bin/create-project.js",
     "start-express-app": "bin/create-project.js"
   },
   "dependencies": {
+    "chalk": "^3.0.0",
     "esm": "^3.2.25",
     "yargs": "^15.1.0"
   },
