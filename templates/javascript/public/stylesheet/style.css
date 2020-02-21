@@ -1,0 +1,41 @@
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  background: #eee;
+}
+
+.main {
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.heading-primary {
+  color: #555555;
+  font-size: 45px;
+  font-weight: 300;
+}
+
+.links-container {
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.anchor {
+  font-size: 14px;
+  color: #999;
+  font-weight: 300;
+  transition: all 0.2s;
+}
+
+.anchor:hover {
+  cursor: pointer;
+  color: #666;
+}

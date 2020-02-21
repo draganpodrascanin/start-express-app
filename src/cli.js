@@ -1,5 +1,5 @@
-const fs = require("fs");
-const chalk = require("chalk");
+// const fs = require("fs");
+// const chalk = require("chalk");
 
 const SetBoilerplate = require("./SetBoilerplate");
 
@@ -15,16 +15,34 @@ module.exports = function cli(options) {
     options.auth
   );
 
-  console.log(!fs.existsSync(setBoilerplate.pathTo));
+  // creating package.json in target directory
+  setBoilerplate.createPackageJson();
 
-  //if directory is specified and doesn't exist, make one
-  if (!fs.existsSync(setBoilerplate.pathTo)) {
-    try {
-      console.log(chalk.green(`making directory ${dirName}`));
-      fs.mkdirSync(setBoilerplate.pathTo);
-    } catch (err) {
-      //failed making a directory
-      console.log(chalk.red(`failed creating directory ${dirName}`));
-    }
-  }
+  //setting .gitignore
+  setBoilerplate.settingGitignore();
+
+  //setting eslint config
+  setBoilerplate.settingEslintConfig();
+
+  //creating server.js and app.js in root of target directory
+  setBoilerplate.createServerAndAppFilesNoAuth();
+
+  //setting up config.env file in root of target directory
+  setBoilerplate.settingEnvFile();
+
+  //creating public/stylesheet/style.css boilerplate
+  setBoilerplate.creatingPublicBoilerplate();
+
+  //creating routes directory and boilerplate route file
+  setBoilerplate.creatingRoutesDirAndBoilerplateRouteFile();
+
+  //creating views directory and home.pug boilerplate view
+  setBoilerplate.creatingViewDirAndFile();
+
+  //creating controllers directory with errorController.js
+  //and boilerplate homeControllers.js
+  setBoilerplate.creatingControllersDirAndBoilerControllers();
+
+  //creating util directory with boilerplate functions and classes
+  setBoilerplate.creatingUtilDirAndFuncs();
 };
