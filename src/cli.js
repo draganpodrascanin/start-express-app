@@ -24,8 +24,11 @@ module.exports = function cli(options) {
   //setting eslint config
   setBoilerplate.settingEslintConfig();
 
-  //creating server.js and app.js in root of target directory
-  setBoilerplate.createServerAndAppFilesNoAuth();
+  //creating app.js in root of target directory
+  if (!options.auth) setBoilerplate.createAppFileNoAuth();
+
+  //create server file in root of target directory
+  setBoilerplate.createServerFile();
 
   //setting up config.env file in root of target directory
   setBoilerplate.settingEnvFile();
@@ -42,6 +45,11 @@ module.exports = function cli(options) {
   //creating controllers directory with errorController.js
   //and boilerplate homeControllers.js
   setBoilerplate.creatingControllersDirAndBoilerControllers();
+
+  //creating handler factory in controller directory
+  if (setBoilerplate.db === "mongo") {
+    setBoilerplate.creatingHanderFactory();
+  }
 
   //creating util directory with boilerplate functions and classes
   setBoilerplate.creatingUtilDirAndFuncs();

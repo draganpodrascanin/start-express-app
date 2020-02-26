@@ -99,19 +99,23 @@ class SetBoilerplates {
     });
   };
 
-  //create server.js and app.js in root of target directory
-  createServerAndAppFilesNoAuth = () => {
-    copyPasteSync(
-      "creating server.js file",
-      "failed to create server.js file",
-      `${this.pathFrom}/server.js`,
-      `${this.pathTo}/server.js`
-    );
+  //create app.js in root of target directory
+  //No AUTH
+  createAppFileNoAuth = () => {
     copyPasteSync(
       "creating app.js file",
       "failed to create app.js file",
       `${this.pathFrom}/app.js`,
       `${this.pathTo}/app.js`
+    );
+  };
+
+  createServerFile = () => {
+    copyPasteSync(
+      "creating server.js file",
+      "failed to create server.js file",
+      `${this.pathFrom}/server.js`,
+      `${this.pathTo}/server.js`
     );
   };
 
@@ -207,6 +211,17 @@ class SetBoilerplates {
     );
   };
 
+  //creating handler Factory in controllers directory
+  //in controller directory
+  creatingHanderFactory = () => {
+    copyPasteSync(
+      "creating homeControllers.js controller file",
+      "failed to create homeControllers controller file",
+      `${this.pathFrom}/controllers/handlerFactory.js`,
+      `${this.pathTo}/controllers/handlerFactory.js`
+    );
+  };
+
   //creating util directory and boilerplate util functions/classes
   creatingUtilDirAndFuncs = () => {
     catchErr("failed making util directory", () => {
@@ -218,6 +233,13 @@ class SetBoilerplates {
       "failed to create catchAsync util function",
       `${this.pathFrom}/util/catchAsync.js`,
       `${this.pathTo}/util/catchAsync.js`
+    );
+
+    copyPasteSync(
+      "creating catchAsync util function",
+      "failed to create catchAsync util function",
+      `${this.pathFrom}/util/apiFeatures.js`,
+      `${this.pathTo}/util/apiFeatuers.js`
     );
 
     copyPasteSync(
