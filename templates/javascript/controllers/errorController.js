@@ -1,11 +1,11 @@
-const AppError = require("../util/appError");
+const AppError = require('../util/appError');
 
 const handleJWTError = () => {
-  return new AppError("Invalid token. Please log in again", 401);
+  return new AppError('Invalid token. Please log in again', 401);
 };
 
 const handleJWTExpiredError = () => {
-  return new AppError("Your token has expired. Please log in again", 401);
+  return new AppError('Your token has expired. Please log in again', 401);
 };
 
 const handleCastErrorDB = err => {
@@ -25,7 +25,7 @@ const handeValidationErrorDB = err => {
     return val.message;
   });
 
-  const message = `Invalid input data. ${errors.join(". ")}`;
+  const message = `Invalid input data. ${errors.join('. ')}`;
 
   return new AppError(message, 400);
 };
@@ -48,28 +48,39 @@ const sendErrorProd = (err, res) => {
     });
   } else {
     //programing or unknown error
-    console.error("====ERROR===", err);
+    console.error('====ERROR===', err);
     res.status(err.status).json({
       status: err.status,
-      message: "serverska greska, molimo vas pokusajte kasnije"
+      message: 'server error, please try again later'
     });
   }
 };
 
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
-  err.status = err.status || "error";
+  err.status = err.status || 'error';
 
-  if (process.env.NODE_ENV === "development") {
+  //if we're in development send us the whole error
+  //it doesn't matter if it's operational or unknown error
+  if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
-  } else if (process.env.NODE_ENV === "production") {
+  } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err };
 
-    if (err.name === "CastError") error = handleCastErrorDB(error);
+    //make DB and other known errors to opperational errors
+    if (err.name === 'CastError') error = handleCastErrorDB(error);
     if (err.code === 11000) error = handleDuplicateFieldsDB(error);
-    if (err.name === "ValidationError") error = handeValidationErrorDB(error);
-    if (err.name === "JsonWebToken") error = handleJWTError();
-    if (err.name === "TokenExpiredError") error = handleJWTExpiredError();
+    if (err.name === 'ValidationError') error = handeValidationErrorDB(error);
+    if (err.name === 'JsonWebToken') error = handleJWTError();
+    if (err.name === 'TokenExpiredError') error = handleJWTExpiredError();
+
+    /*
+    in poduction, we are going to send status and message only
+    we won't send the error stack to the client
+    if err is not operational console.error,
+    send generic message, and err.satus to client
+    */
+
     sendErrorProd(error, res);
   }
 };

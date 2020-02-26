@@ -19,38 +19,52 @@ module.exports = function cli(options) {
   setBoilerplate.createPackageJson();
 
   //setting .gitignore
-  setBoilerplate.settingGitignore();
+  setBoilerplate.setGitignore();
 
   //setting eslint config
-  setBoilerplate.settingEslintConfig();
+  setBoilerplate.setEslintConfig();
 
   //creating app.js in root of target directory
+  //======there might not be difference later, so refactor might be needed======
   if (!options.auth) setBoilerplate.createAppFileNoAuth();
+  else setBoilerplate.createAppFileNoAuth(); //temporary
 
   //create server file in root of target directory
   setBoilerplate.createServerFile();
 
   //setting up config.env file in root of target directory
-  setBoilerplate.settingEnvFile();
+  setBoilerplate.setEnvFile();
 
   //creating public/stylesheet/style.css boilerplate
-  setBoilerplate.creatingPublicBoilerplate();
+  setBoilerplate.createPublicBoilerplate();
 
   //creating routes directory and boilerplate route file
-  setBoilerplate.creatingRoutesDirAndBoilerplateRouteFile();
+  setBoilerplate.createRoutesDirAndBoilerplateRouteFile();
 
   //creating views directory and home.pug boilerplate view
-  setBoilerplate.creatingViewDirAndFile();
+  setBoilerplate.createViewDirAndFile();
+
+  //creating boilerplate email directory and template files in views dir
+  setBoilerplate.createEmailTemplatesDirAndFiles();
 
   //creating controllers directory with errorController.js
   //and boilerplate homeControllers.js
-  setBoilerplate.creatingControllersDirAndBoilerControllers();
+  setBoilerplate.createControllersDirAndBoilerControllers();
+
+  //if auth is true, create auth controllers
+  if (options.auth) setBoilerplate.createAuthControllers();
+
+  //create models directory
+  setBoilerplate.createModelsDirectory();
+
+  //if auth is true, create basic user model
+  if (options.auth) setBoilerplate.createUserModel();
 
   //creating handler factory in controller directory
   if (setBoilerplate.db === "mongo") {
-    setBoilerplate.creatingHanderFactory();
+    setBoilerplate.createHanderFactory();
   }
 
   //creating util directory with boilerplate functions and classes
-  setBoilerplate.creatingUtilDirAndFuncs();
+  setBoilerplate.createUtilDirAndFuncs();
 };

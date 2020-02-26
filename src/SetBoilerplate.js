@@ -120,7 +120,7 @@ class SetBoilerplates {
   };
 
   //setting config.env in root of target directory
-  settingEnvFile = () => {
+  setEnvFile = () => {
     copyPasteSync(
       "setting config.env file",
       "failed to set config.env file",
@@ -130,7 +130,7 @@ class SetBoilerplates {
   };
 
   //creating public/stylesheet directory and style.css
-  creatingPublicBoilerplate = () => {
+  createPublicBoilerplate = () => {
     //public
     catchErr("failed making public directory", () => {
       fs.mkdirSync(`${this.pathTo}/public`);
@@ -162,7 +162,7 @@ class SetBoilerplates {
   };
 
   //creating routes directory and homeRoutes.js
-  creatingRoutesDirAndBoilerplateRouteFile = () => {
+  createRoutesDirAndBoilerplateRouteFile = () => {
     catchErr("failed making routes directory", () => {
       fs.mkdirSync(`${this.pathTo}/routes`);
     });
@@ -176,7 +176,7 @@ class SetBoilerplates {
   };
 
   //creating views directory in root of target directory with home.pug view
-  creatingViewDirAndFile = () => {
+  createViewDirAndFile = () => {
     catchErr("failed making views directory", () => {
       fs.mkdirSync(`${this.pathTo}/views`);
     });
@@ -189,9 +189,45 @@ class SetBoilerplates {
     );
   };
 
+  //creating email directory and boilerplate templates in
+  //views directory
+  createEmailTemplatesDirAndFiles = () => {
+    catchErr("failed making views directory", () => {
+      fs.mkdirSync(`${this.pathTo}/views/email`);
+    });
+
+    copyPasteSync(
+      "creating _style.pug email template file",
+      "failed to create _style.pug email template file",
+      `${this.pathFrom}/views/email/_style.pug`,
+      `${this.pathTo}/views/email/_style.pug`
+    );
+
+    copyPasteSync(
+      "creating baseEmail.pug email template file",
+      "failed to create baseEmail.pug email template file",
+      `${this.pathFrom}/views/email/baseEmail.pug`,
+      `${this.pathTo}/views/email/baseEmail.pug`
+    );
+
+    copyPasteSync(
+      "creating welcome.pug email template file",
+      "failed to create welcome.pug email template file",
+      `${this.pathFrom}/views/email/welcome.pug`,
+      `${this.pathTo}/views/email/welcome.pug`
+    );
+
+    copyPasteSync(
+      "creating passwordReset.pug email template file",
+      "failed to create passwordReset.pug email template file",
+      `${this.pathFrom}/views/email/passwordReset.pug`,
+      `${this.pathTo}/views/email/passwordReset.pug`
+    );
+  };
+
   //creating controllers directory in root of target directory
   //with errorController.js and homeController.js
-  creatingControllersDirAndBoilerControllers = () => {
+  createControllersDirAndBoilerControllers = () => {
     catchErr("failed making controllers directory", () => {
       fs.mkdirSync(`${this.pathTo}/controllers`);
     });
@@ -211,19 +247,46 @@ class SetBoilerplates {
     );
   };
 
+  //create authControllers.js in controller directory
+  createAuthControllers = () => {
+    copyPasteSync(
+      "creating authController.js controller file",
+      "failed to create authController.js controller file",
+      `${this.pathFrom}/controllers/authControllers.js`,
+      `${this.pathTo}/controllers/authControllers.js`
+    );
+  };
+
+  //create models directory
+  createModelsDirectory = () => {
+    catchErr("failed making models directory", () => {
+      fs.mkdirSync(`${this.pathTo}/models`);
+    });
+  };
+
+  //create basic user model in models directory
+  createUserModel = () => {
+    copyPasteSync(
+      "creating user.js model  file",
+      "failed to create user model  file",
+      `${this.pathFrom}/models/User.js`,
+      `${this.pathTo}/models/User.js`
+    );
+  };
+
   //creating handler Factory in controllers directory
   //in controller directory
-  creatingHanderFactory = () => {
+  createHanderFactory = () => {
     copyPasteSync(
-      "creating homeControllers.js controller file",
-      "failed to create homeControllers controller file",
+      "creating handerFactory.js controller file",
+      "failed to create handerFactory controller file",
       `${this.pathFrom}/controllers/handlerFactory.js`,
       `${this.pathTo}/controllers/handlerFactory.js`
     );
   };
 
   //creating util directory and boilerplate util functions/classes
-  creatingUtilDirAndFuncs = () => {
+  createUtilDirAndFuncs = () => {
     catchErr("failed making util directory", () => {
       fs.mkdirSync(`${this.pathTo}/util`);
     });
@@ -248,10 +311,17 @@ class SetBoilerplates {
       `${this.pathFrom}/util/AppError.js`,
       `${this.pathTo}/util/AppError.js`
     );
+
+    copyPasteSync(
+      "creating email util class",
+      "failed to create email util class",
+      `${this.pathFrom}/util/email.js`,
+      `${this.pathTo}/util/email.js`
+    );
   };
 
   //setting config for eslint
-  settingEslintConfig = () => {
+  setEslintConfig = () => {
     copyPasteSync(
       "setting .eslintrc.json",
       "failed setting .eslintrc.json",
@@ -268,7 +338,7 @@ class SetBoilerplates {
   };
 
   //setting gitignore
-  settingGitignore = () => {
+  setGitignore = () => {
     copyPasteSync(
       "setting .gitignore",
       "failed setting .gitignore",

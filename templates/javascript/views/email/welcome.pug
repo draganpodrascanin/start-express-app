@@ -1,0 +1,11 @@
+//- you should remake this template or better yet logic
+//-probbably you want to make confirmation mail for new users, it's not hard
+//-make token, save to user model (you can hash it if you want), send by mail, confirm by clicking on link, set user to active
+extends baseEmail
+
+block content
+  p Hi #{firstName},
+  p Welcome to my new express app.
+  p Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste veniam dignissimos obcaecati libero tempora, temporibus ab nesciunt iusto perferendis sunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias consequuntur eveniet ut aut voluptatum ex maiores mollitia qui molestiae illum?
+
+  p - John Doe, CEO
