@@ -223,6 +223,13 @@ class SetBoilerplates {
       `${this.pathFrom}/views/email/passwordReset.pug`,
       `${this.pathTo}/views/email/passwordReset.pug`
     );
+
+    copyPasteSync(
+      "creating customEmail.pug email template file",
+      "failed to create customEmail.pug email template file",
+      `${this.pathFrom}/views/email/customEmail.pug`,
+      `${this.pathTo}/views/email/customEmail.pug`
+    );
   };
 
   //creating controllers directory in root of target directory
@@ -317,6 +324,13 @@ class SetBoilerplates {
       "failed to create email util class",
       `${this.pathFrom}/util/email.js`,
       `${this.pathTo}/util/email.js`
+    );
+
+    copyPasteSync(
+      "creating emailCustom util class",
+      "failed to create emailCustom util class",
+      `${this.pathFrom}/util/emailCustom.js`,
+      `${this.pathTo}/util/emailCustom.js`
     );
   };
 
