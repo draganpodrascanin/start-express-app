@@ -158,9 +158,9 @@ exports.protect = catchAsync(async (req, res, next) => {
 //==============================================================================================================================
 //==============================================================================================================================
 
-// Only for rendered pages, no errors!
+// Only for rendered pages, no errors! NOT for protecting routes!
 exports.isLoggedIn = async (req, res, next) => {
-  if (req.cookies.jwt) {
+  if (req.cookies.ejwt) {
     try {
       // 1) verify token
       const decoded = await promisify(jwt.verify)(

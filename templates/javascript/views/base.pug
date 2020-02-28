@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    block head
+      meta(charset='UTF-8')
+      meta(name='viewport' content='width=device-width, initial-scale=1.0')
+      link(rel='shortcut icon' type='image/png' href='/icons/favicon.png')
+      link(rel='stylesheet' href='/stylesheet/style.css')
+      title Start Express App
+
+  body(data-alert=`${alert ? alert : ''}`)
+    
+      .nav
+        ul.nav-ul
+          if user
+            li.nav-link
+              a(href="/logout") LogOut
+            li.nav-link
+              a(href=`/user/${user._id}`) My Profile
+          else
+            li.nav-link
+              a(href="/login") Log in
+            li.nav-link
+              a(href=`/signup`) Sign up
+    block content
+
+    
+    script(src="/java")

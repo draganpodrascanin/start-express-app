@@ -39,3 +39,72 @@ html {
   cursor: pointer;
   color: #666;
 }
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 100vw;
+  display: flex;
+  justify-content: end;
+}
+
+.nav-ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-link {
+  font-size: 20px;
+  padding: 5px;
+  font-weight: 300;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  cursor: pointer;
+  color: #444;
+}
+
+.form-container {
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 10px 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-weight: 300;
+  font-size: 14px;
+  color: #333;
+}
+
+.form-input {
+  outline: none;
+  padding: 5px 10px;
+  font-size: 18px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  transition: all 0.2s;
+}
+
+.form-input:active,
+.form-input:hover {
+  outline: none;
+  border: 1px solid #333;
+}

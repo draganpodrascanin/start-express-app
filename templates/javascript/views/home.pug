@@ -1,19 +1,8 @@
-doctype html
-html
-  head
-    block head
-      meta(charset='UTF-8')
-      meta(name='viewport' content='width=device-width, initial-scale=1.0')
-      link(rel='shortcut icon' type='image/png' href='/icons/favicon.png')
-      link(rel='stylesheet' href='/stylesheet/style.css')
-      title Start Express App
+extends base
 
-  body(data-alert=`${alert ? alert : ''}`)
-    .main
+block content
+     .main
         h1.heading-primary Start Express App
         .links-container
             a.anchor(href="#") github
             a.anchor(href="#") npm
-    
-
-  
