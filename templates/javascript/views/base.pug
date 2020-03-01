@@ -8,21 +8,24 @@ html
       link(rel='stylesheet' href='/stylesheet/style.css')
       title Start Express App
 
-  body(data-alert=`${alert ? alert : ''}`)
+  body
     
-      .nav
-        ul.nav-ul
-          if user
-            li.nav-link
-              a(href="/logout") LogOut
-            li.nav-link
-              a(href=`/user/${user._id}`) My Profile
-          else
-            li.nav-link
-              a(href="/login") Log in
-            li.nav-link
-              a(href=`/signup`) Sign up
+    .nav
+      a.home(href="/") HOME
+      ul.nav-ul
+        if user
+          li.nav-link
+            a#logout(href="#") LogOut
+          li.nav-link
+            a(href=`/user/${user._id}`) My Profile
+        else
+          li.nav-link
+            a(href="/login") Log in
+          li.nav-link
+            a(href=`/signup`) Sign up
     block content
 
-    
-    script(src="/java")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js")
+    block sripts
+    if user
+      script(src="/javascript/logout.js")

@@ -1,8 +1,9 @@
 const express = require('express');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 
 const userRouter = require('./routes/userRouter.js');
-const homeRoutes = require('./routes/homeRouter.js');
+const viewsRoutes = require('./routes/viewsRouter.js');
 
 const errorController = require('./controllers/errorController.js');
 
@@ -17,8 +18,11 @@ app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
 app.use(cookieParser());
 
+//authentication login/signup/logout
 app.use('/api/v1/users', userRouter);
-app.use('/', homeRoutes);
+
+app.use('/', viewsRoutes);
+
 app.use('*', (req, res, next) => {
   next(new AppError(`can't find ${req.originalUrl} on this server`, 404));
 });

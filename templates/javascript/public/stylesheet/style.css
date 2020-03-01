@@ -4,6 +4,19 @@ html {
   background: #eee;
 }
 
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
 .main {
   max-width: 500px;
   position: absolute;
@@ -41,42 +54,58 @@ html {
 }
 
 .nav {
-  position: fixed;
-  top: 0;
-  left: 0;
   height: 30px;
-  width: 100vw;
+  width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
+}
+
+.home {
+  text-decoration: none;
+  color: #999;
+  padding: 10px;
+  font-size: 18px;
+  margin-left: 30px;
+  font-weight: 200;
 }
 
 .nav-ul {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
 
 .nav-link {
-  font-size: 20px;
-  padding: 5px;
+  height: 100%;
+  list-style: none;
+  padding: 10px;
+  margin: 0 10px;
+}
+
+.nav-link a {
+  text-decoration: none;
+  font-size: 18px;
   font-weight: 300;
   color: #666;
   transition: all 0.2s;
 }
 
-.nav-link:hover {
+.nav-link a:hover {
   cursor: pointer;
   color: #444;
 }
 
 .form-container {
+  width: 90vw;
   max-width: 500px;
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
-  transform: translate(-40%, -50%);
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 50px;
+  border-radius: 10px;
   background-color: #fff;
   box-shadow: 10px 6px 16px rgba(0, 0, 0, 0.3);
 }
@@ -107,4 +136,19 @@ html {
 .form-input:hover {
   outline: none;
   border: 1px solid #333;
+}
+
+.btn-submit {
+  cursor: pointer;
+  font-size: 15px;
+  padding: 6px 12px;
+  color: #333;
+  border: 1px solid #999;
+  border-radius: 5px;
+  background-color: #def;
+  transition: all 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #cde;
 }

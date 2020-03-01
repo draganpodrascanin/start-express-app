@@ -42,11 +42,7 @@ router.use(authController.restrictTo(['admin', 'head-admin']));
 
 //(only for admins)
 //get all users
-//create a user
-router
-  .route('/')
-  .get(userController.getAllUsers)
-  .post(userController.createUser);
+router.route('/').get(userController.getAllUsers);
 
 //(only for admins)
 //get a user with slug

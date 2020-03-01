@@ -3,7 +3,7 @@ const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const User = require('./../models/User');
 const catchAsync = require('./../utils/catchAsync');
-const AppError = require('./../utils/appError');
+const AppError = require('./../utils/AppError');
 const Email = require('./../utils/email');
 
 //create JWT function
@@ -119,7 +119,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(' ')[1];
   } else if (req.cookies.ejwt) {
-    token = req.cookies.jwt;
+    token = req.cookies.ejwt;
   }
 
   if (!token) {
@@ -164,7 +164,7 @@ exports.isLoggedIn = async (req, res, next) => {
     try {
       // 1) verify token
       const decoded = await promisify(jwt.verify)(
-        req.cookies.jwt,
+        req.cookies.ejwt,
         process.env.JWT_SECRET
       );
 

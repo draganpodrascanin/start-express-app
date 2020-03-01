@@ -25,9 +25,8 @@ module.exports = function cli(options) {
   setBoilerplate.setEslintConfig();
 
   //creating app.js in root of target directory
-  //======there might not be difference later, so refactor might be needed======
   if (!options.auth) setBoilerplate.createAppFileNoAuth();
-  else setBoilerplate.createAppFileNoAuth(); //temporary
+  else setBoilerplate.createAppFileAuth();
 
   //create server file in root of target directory
   setBoilerplate.createServerFile();
@@ -38,11 +37,18 @@ module.exports = function cli(options) {
   //creating public/stylesheet/style.css boilerplate
   setBoilerplate.createPublicBoilerplate();
 
+  //creating client js files for authentication
+  if (options.auth) setBoilerplate.createAuthClientJsFiles();
+
   //creating routes directory and boilerplate route file
-  setBoilerplate.createRoutesDirAndBoilerplateRouteFile();
+  if (options.auth) setBoilerplate.createRoutesDirAndBoilerplateRouteFileAuth();
+  else setBoilerplate.createRoutesDirAndBoilerplateRouteFileNoAuth();
 
   //creating views directory and home.pug boilerplate view
   setBoilerplate.createViewDirAndFile();
+
+  //creating auth views signup and login
+  if (options.auth) setBoilerplate.creatingLoginAndSignupViews();
 
   //creating boilerplate email directory and template files in views dir
   setBoilerplate.createEmailTemplatesDirAndFiles();

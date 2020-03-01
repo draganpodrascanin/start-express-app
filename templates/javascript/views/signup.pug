@@ -1,8 +1,8 @@
 extends base 
 
 block content
-    .main
-        h1.heading-primary Log in
+    .form-container
+        h1.heading-primary Sign Up
         form.form#loginform 
             .form-group
                 label.form-label(for='email') Enter your email    
@@ -11,7 +11,10 @@ block content
                 label.form-label(for='password') Enter your password    
                 input.form-input#password(type="password", placeholder='••••••••••', required )
             .form-group
-                label.form-label(for='password') Enter your password    
-                input.form-input#passwordConfirm(type="passwordConfirm", placeholder='••••••••••', required )
+                label.form-label(for='passwordConfirm') Enter your password    
+                input.form-input#passwordConfirm(type="password", placeholder='••••••••••', required )
             input.btn-submit(type="submit")
             #error
+
+block sripts
+    script(src="/javascript/signup.js")

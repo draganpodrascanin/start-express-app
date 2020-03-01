@@ -2,9 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
 const Spinner = require("cli-spinner").Spinner;
-const makeCliSpinner = require("./util/makeCliSpinner");
-const catchErr = require("./util/catchErr");
-const copyPasteSync = require("./util/copyPasteSync");
+const makeCliSpinner = require("./utils/makeCliSpinner");
+const catchErr = require("./utils/catchErr");
+const copyPasteSync = require("./utils/copyPasteSync");
 
 class SetBoilerplates {
   constructor(pathTo, ts, db, auth) {
@@ -110,6 +110,15 @@ class SetBoilerplates {
     );
   };
 
+  createAppFileAuth = () => {
+    copyPasteSync(
+      "creating app.js file",
+      "failed to create app.js file",
+      `${this.pathFrom}/appAuth.js`,
+      `${this.pathTo}/app.js`
+    );
+  };
+
   createServerFile = () => {
     copyPasteSync(
       "creating server.js file",
@@ -143,49 +152,121 @@ class SetBoilerplates {
     catchErr("failed making icons directory", () => {
       fs.mkdirSync(`${this.pathTo}/public/icons`);
     });
+    //javascript
+    catchErr("failed making icons directory", () => {
+      fs.mkdirSync(`${this.pathTo}/public/javascript`);
+    });
 
     //style.css
     copyPasteSync(
       "creating style.css file",
       "failed to create style.css file",
-      `${this.pathFrom}//public/stylesheet/style.css`,
-      `${this.pathTo}//public/stylesheet/style.css`
+      `${this.pathFrom}/public/stylesheet/style.css`,
+      `${this.pathTo}/public/stylesheet/style.css`
     );
 
     //favicon.png
     copyPasteSync(
       "creating favicon.png file",
       "failed to create favicon.png file",
-      `${this.pathFrom}//public/icons/favicon.png`,
-      `${this.pathTo}//public/icons/favicon.png`
+      `${this.pathFrom}/public/icons/favicon.png`,
+      `${this.pathTo}/public/icons/favicon.png`
     );
   };
 
-  //creating routes directory and homeRoutes.js
-  createRoutesDirAndBoilerplateRouteFile = () => {
+  // public js files for auth
+  createAuthClientJsFiles = () => {
+    copyPasteSync(
+      "creating signup.js file",
+      "failed to create signup.js file",
+      `${this.pathFrom}/public/javascript/signup.js`,
+      `${this.pathTo}/public/javascript/signup.js`
+    );
+
+    copyPasteSync(
+      "creating login.js file",
+      "failed to create login.js file",
+      `${this.pathFrom}/public/javascript/login.js`,
+      `${this.pathTo}/public/javascript/login.js`
+    );
+
+    copyPasteSync(
+      "creating logout.js file",
+      "failed to create logout.js file",
+      `${this.pathFrom}/public/javascript/logout.js`,
+      `${this.pathTo}/public/javascript/logout.js`
+    );
+  };
+  //creating routes directory and viewsRoutes.js no auth
+  createRoutesDirAndBoilerplateRouteFileNoAuth = () => {
     catchErr("failed making routes directory", () => {
       fs.mkdirSync(`${this.pathTo}/routes`);
     });
 
     copyPasteSync(
-      "creating homeRoutes.js routes file",
-      "failed to create homeRoutes.js routes file",
-      `${this.pathFrom}/routes/homeRoutes.js`,
-      `${this.pathTo}/routes/homeRoutes.js`
+      "creating viewsRouter.js routes file",
+      "failed to create viewsRouter.js routes file",
+      `${this.pathFrom}/routes/viewsRouterNoAuth.js`,
+      `${this.pathTo}/routes/viewsRouter.js`
     );
   };
 
-  //creating views directory in root of target directory with home.pug view
+  //creating routes directory and viewsRoutes.js  auth
+  createRoutesDirAndBoilerplateRouteFileAuth = () => {
+    catchErr("failed making routes directory", () => {
+      fs.mkdirSync(`${this.pathTo}/routes`);
+    });
+
+    copyPasteSync(
+      "creating viewsRouter.js routes file",
+      "failed to create viewsRouter.js routes file",
+      `${this.pathFrom}/routes/viewsRouterAuth.js`,
+      `${this.pathTo}/routes/viewsRouter.js`
+    );
+
+    copyPasteSync(
+      "creating userRouter.js routes file",
+      "failed to create userRouter.js routes file",
+      `${this.pathFrom}/routes/userRouter.js`,
+      `${this.pathTo}/routes/userRouter.js`
+    );
+  };
+
+  //creating views directory in root of target directory with base and home.pug view
   createViewDirAndFile = () => {
     catchErr("failed making views directory", () => {
       fs.mkdirSync(`${this.pathTo}/views`);
     });
 
     copyPasteSync(
+      "creating base.pug view file",
+      "failed to create base.pug view file",
+      `${this.pathFrom}/views/base.pug`,
+      `${this.pathTo}/views/base.pug`
+    );
+
+    copyPasteSync(
       "creating home.pug view file",
       "failed to create home.pug view file",
       `${this.pathFrom}/views/home.pug`,
       `${this.pathTo}/views/home.pug`
+    );
+  };
+
+  //creating signup & login views in views directory
+  creatingLoginAndSignupViews = () => {
+    copyPasteSync(
+      "creating login.pug view file",
+      "failed to create login.pug view file",
+      `${this.pathFrom}/views/login.pug`,
+      `${this.pathTo}/views/login.pug`
+    );
+
+    copyPasteSync(
+      "creating signup.pug view file",
+      "failed to create signup.pug view file",
+      `${this.pathFrom}/views/signup.pug`,
+      `${this.pathTo}/views/signup.pug`
     );
   };
 
@@ -246,12 +327,14 @@ class SetBoilerplates {
       `${this.pathTo}/controllers/errorController.js`
     );
 
-    copyPasteSync(
-      "creating homeControllers.js controller file",
-      "failed to create homeControllers controller file",
-      `${this.pathFrom}/controllers/homeControllers.js`,
-      `${this.pathTo}/controllers/homeControllers.js`
-    );
+    if (!this.auth) {
+      copyPasteSync(
+        "creating viewsControllers.js controller file",
+        "failed to create viewsControllers controller file",
+        `${this.pathFrom}/controllers/viewsControllersNoAuth.js`,
+        `${this.pathTo}/controllers/viewsControllers.js`
+      );
+    }
   };
 
   //create authControllers.js in controller directory
@@ -261,6 +344,20 @@ class SetBoilerplates {
       "failed to create authController.js controller file",
       `${this.pathFrom}/controllers/authControllers.js`,
       `${this.pathTo}/controllers/authControllers.js`
+    );
+
+    copyPasteSync(
+      "creating userController.js controller file",
+      "failed to create userController.js controller file",
+      `${this.pathFrom}/controllers/userControllers.js`,
+      `${this.pathTo}/controllers/userControllers.js`
+    );
+
+    copyPasteSync(
+      "creating viewsControllers.js controller file",
+      "failed to create viewsControllers controller file",
+      `${this.pathFrom}/controllers/viewsControllersAuth.js`,
+      `${this.pathTo}/controllers/viewsControllers.js`
     );
   };
 
@@ -292,45 +389,45 @@ class SetBoilerplates {
     );
   };
 
-  //creating util directory and boilerplate util functions/classes
+  //creating utils directory and boilerplate utils functions/classes
   createUtilDirAndFuncs = () => {
-    catchErr("failed making util directory", () => {
-      fs.mkdirSync(`${this.pathTo}/util`);
+    catchErr("failed making utils directory", () => {
+      fs.mkdirSync(`${this.pathTo}/utils`);
     });
 
     copyPasteSync(
-      "creating catchAsync util function",
-      "failed to create catchAsync util function",
-      `${this.pathFrom}/util/catchAsync.js`,
-      `${this.pathTo}/util/catchAsync.js`
+      "creating catchAsync utils function",
+      "failed to create catchAsync utils function",
+      `${this.pathFrom}/utils/catchAsync.js`,
+      `${this.pathTo}/utils/catchAsync.js`
     );
 
     copyPasteSync(
-      "creating catchAsync util function",
-      "failed to create catchAsync util function",
-      `${this.pathFrom}/util/apiFeatures.js`,
-      `${this.pathTo}/util/apiFeatuers.js`
+      "creating catchAsync utils function",
+      "failed to create catchAsync utils function",
+      `${this.pathFrom}/utils/apiFeatures.js`,
+      `${this.pathTo}/utils/apiFeatures.js`
     );
 
     copyPasteSync(
-      "creating AppError util class",
-      "failed to create AppError util class",
-      `${this.pathFrom}/util/AppError.js`,
-      `${this.pathTo}/util/AppError.js`
+      "creating AppError utils class",
+      "failed to create AppError utils class",
+      `${this.pathFrom}/utils/AppError.js`,
+      `${this.pathTo}/utils/AppError.js`
     );
 
     copyPasteSync(
-      "creating email util class",
-      "failed to create email util class",
-      `${this.pathFrom}/util/email.js`,
-      `${this.pathTo}/util/email.js`
+      "creating email utils class",
+      "failed to create email utils class",
+      `${this.pathFrom}/utils/email.js`,
+      `${this.pathTo}/utils/email.js`
     );
 
     copyPasteSync(
-      "creating emailCustom util class",
-      "failed to create emailCustom util class",
-      `${this.pathFrom}/util/emailCustom.js`,
-      `${this.pathTo}/util/emailCustom.js`
+      "creating emailCustom utils class",
+      "failed to create emailCustom utils class",
+      `${this.pathFrom}/utils/emailCustom.js`,
+      `${this.pathTo}/utils/emailCustom.js`
     );
   };
 
