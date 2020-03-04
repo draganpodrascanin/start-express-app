@@ -50,6 +50,9 @@ module.exports = function cli(options) {
   //creating auth views signup and login
   if (options.auth) setBoilerplate.creatingLoginAndSignupViews();
 
+  //creating forgot password and password reset views
+  if (options.auth) setBoilerplate.creatingPasswordResetViews();
+
   //creating boilerplate email directory and template files in views dir
   setBoilerplate.createEmailTemplatesDirAndFiles();
 

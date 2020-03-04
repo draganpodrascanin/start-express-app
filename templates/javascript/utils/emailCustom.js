@@ -13,9 +13,8 @@ const htmlToText = require('html-to-text');
 */
 
 module.exports = class Email {
-  constructor(email, name, subject, text, url) {
+  constructor(email, subject, text, url) {
     this.to = email;
-    this.firstName = name;
     this.url = url;
     this.subject = subject;
     this.text = text;

@@ -196,6 +196,20 @@ class SetBoilerplates {
       `${this.pathFrom}/public/javascript/logout.js`,
       `${this.pathTo}/public/javascript/logout.js`
     );
+
+    copyPasteSync(
+      "creating forgotPassword.js file",
+      "failed to create forgotPassword.js file",
+      `${this.pathFrom}/public/javascript/forgotPassword.js`,
+      `${this.pathTo}/public/javascript/forgotPassword.js`
+    );
+
+    copyPasteSync(
+      "creating resetPassword.js file",
+      "failed to create resetPassword.js file",
+      `${this.pathFrom}/public/javascript/resetPassword.js`,
+      `${this.pathTo}/public/javascript/resetPassword.js`
+    );
   };
   //creating routes directory and viewsRoutes.js no auth
   createRoutesDirAndBoilerplateRouteFileNoAuth = () => {
@@ -267,6 +281,22 @@ class SetBoilerplates {
       "failed to create signup.pug view file",
       `${this.pathFrom}/views/signup.pug`,
       `${this.pathTo}/views/signup.pug`
+    );
+  };
+
+  creatingPasswordResetViews = () => {
+    copyPasteSync(
+      "creating forgotPassword.pug view file",
+      "failed to create forgotPassword.pug view file",
+      `${this.pathFrom}/views/forgotPassword.pug`,
+      `${this.pathTo}/views/forgotPassword.pug`
+    );
+
+    copyPasteSync(
+      "creating resetPassword.pug view file",
+      "failed to create resetPassword.pug view file",
+      `${this.pathFrom}/views/resetPassword.pug`,
+      `${this.pathTo}/views/resetPassword.pug`
     );
   };
 

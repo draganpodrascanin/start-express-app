@@ -11,7 +11,8 @@ block content
                 label.form-label(for='password') Enter your password    
                 input.form-input#password(type="password", placeholder='••••••••••', required )
             input.btn-submit(type="submit")
+            a.forgot-password-link(href='/forgotPassword') forgot password?
             #error
 
-block sripts
+block scripts
     script(src="/javascript/login.js")

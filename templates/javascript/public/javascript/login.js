@@ -12,7 +12,7 @@ const login = async (email, password) => {
       window.location.replace('http://localhost:8000/');
     }, 1000);
   } catch (err) {
-    console.log(err);
+    console.log(err.response);
     document.querySelector(
       '#error'
     ).innerHTML = `<span>${err.response.data.message}</span>`;

@@ -12,3 +12,12 @@ exports.showLogin = (req, res, next) => {
 exports.showSignup = (req, res, next) => {
   res.status(200).render('../views/signup.pug');
 };
+
+//forgot password page
+exports.showForgotPassword = (req, res, next) => {
+  res.status(200).render('../views/forgotPassword.pug');
+};
+
+exports.showResetPassword = (req, res, next) => {
+  res.status(200).render('../views/resetPassword.pug');
+};
