@@ -210,6 +210,13 @@ class SetBoilerplates {
       `${this.pathFrom}/public/javascript/resetPassword.js`,
       `${this.pathTo}/public/javascript/resetPassword.js`
     );
+
+    copyPasteSync(
+      "creating axios.js file",
+      "failed to create axios.js file",
+      `${this.pathFrom}/public/javascript/axios.js`,
+      `${this.pathTo}/public/javascript/axios.js`
+    );
   };
   //creating routes directory and viewsRoutes.js no auth
   createRoutesDirAndBoilerplateRouteFileNoAuth = () => {
