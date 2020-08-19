@@ -4,13 +4,13 @@
   (db mongo with mongoose)
 */
 
-const catchAsync = require('./../utils/catchAsync');
-const AppError = require('./../utils/appError');
-const APIFeatures = require('./../utils/apiFeatures');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
+const APIFeatures = require('../utils/apiFeatures');
 
 // delete one entry from database where id match to slug
 //(authorization middleware most likely needed before this.)
-exports.deleteOne = Model =>
+exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndDelete(req.params.id);
 
@@ -20,17 +20,17 @@ exports.deleteOne = Model =>
 
     res.status(204).json({
       status: 'success',
-      data: null
+      data: null,
     });
   });
 
 //update one entry from database where id matches to slug
 //(authorization middleware most likely needed before this.)
-exports.updateOne = Model =>
+exports.updateOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-      runValidators: true
+      runValidators: true,
     });
 
     if (!doc) {
@@ -40,22 +40,22 @@ exports.updateOne = Model =>
     res.status(200).json({
       status: 'success',
       data: {
-        data: doc
-      }
+        data: doc,
+      },
     });
   });
 
 //create one new entry to database
 //(might want auth middleware before this)
-exports.createOne = Model =>
+exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.create(req.body);
 
     res.status(201).json({
       status: 'success',
       data: {
-        data: doc
-      }
+        data: doc,
+      },
     });
   });
 
@@ -74,14 +74,14 @@ exports.getOne = (Model, popOptions) =>
     res.status(200).json({
       status: 'success',
       data: {
-        data: doc
-      }
+        data: doc,
+      },
     });
   });
 
 //get all entries from db
 //can be filtered, sorted, limited and paginated with query string
-exports.getAll = Model =>
+exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     const features = new APIFeatures(Model.find(), req.query)
       .filter()
@@ -96,7 +96,7 @@ exports.getAll = Model =>
       status: 'success',
       results: doc.length,
       data: {
-        data: doc
-      }
+        data: doc,
+      },
     });
   });

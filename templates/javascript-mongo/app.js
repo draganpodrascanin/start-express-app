@@ -3,8 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const AppError = require('./utils/AppError.js');
 
-const userRouter = require('./routes/userRouter.js');
-const viewsRoutes = require('./routes/viewsRouter.js');
+const viewsRoutes = require('./routes/viewsRouter.js.js');
 
 const errorController = require('./controllers/errorController.js');
 
@@ -18,9 +17,6 @@ app.use(express.static(`${__dirname}/public`));
 
 app.use(express.json());
 app.use(cookieParser());
-
-//authentication login/signup/logout
-app.use('/api/v1/users', userRouter);
 
 app.use('/', viewsRoutes);
 

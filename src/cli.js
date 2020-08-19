@@ -1,79 +1,130 @@
-// const fs = require("fs");
-// const chalk = require("chalk");
+import arg from 'arg';
+import inquirer from 'inquirer';
+import { Options } from './options';
 
-const SetBoilerplate = require("./SetBoilerplate");
+// const parseArugmentsIntoOptions = (rawArg, yargs) => {
+// 	const args = arg(
+// 		{
+// 			'--yes': Boolean,
+// 			'--authentication': Boolean,
+// 			'--git': Boolean,
+// 			'--install': Boolean,
+// 			'--typescript': Boolean,
+// 			'--database': String,
+// 			'--y': '--yes',
+// 			'--db': '--database',
+// 			'--auth': '--authentication',
+// 			'--a': '--authentication',
+// 			'--g': '--git',
+// 			'--i': '--install',
+// 			'--ts': '--typescript',
+// 		},
+// 		{
+// 			argv: rawArg.slice(2),
+// 		}
+// 	);
 
-module.exports = function cli(options) {
-  //getting directory name if specified
-  const dirName = options._[0];
+// 	// if(yargs.language !== 'js' || yargs.language !== 'ts' || yargs.language !== 'javascript' || yargs.language !== 'typescript') yargs.language = undefined
+// 	// if(yargs.language === 'js') yargs.language = 'javascript'
+// 	// if(yargs.language === 'ts') yargs.language = 'typescript'
 
-  //configure arguments and abstract methods
-  const setBoilerplate = new SetBoilerplate(
-    dirName,
-    options.ts,
-    options.db,
-    options.auth
-  );
+// 	if (yargs.database !== 'mongodb' || yargs.database !== 'sql')
+// 		yargs.database = undefined;
 
-  // creating package.json in target directory
-  setBoilerplate.createPackageJson();
+// 	return {
+// 		skipPrompt: args['--yes'] || false,
+// 		git: args['--git'] || false,
+// 		language: (args['--typescript'] && 'typescript') || false, //set typescript, or later prompted, or defaulted to javascript
+// 		database: yargs.database || false,
+// 		authentication: args['--authentication'] || false,
+// 		runInstall: args['--install'] || false,
+// 	};
+// };
 
-  //setting .gitignore
-  setBoilerplate.setGitignore();
+// const promptForMissingOptions = async (options) => {
+// 	const DEFAULT_LANGUANGE = 'javascript';
+// 	const DEFAULT_DATABASE = 'mongodb';
 
-  //setting eslint config
-  setBoilerplate.setEslintConfig();
+// 	if (options.skipPrompt) {
+// 		return {
+// 			...options,
+// 			language: DEFAULT_LANGUANGE,
+// 			database: DEFAULT_DATABASE,
+// 		};
+// 	}
 
-  //creating app.js in root of target directory
-  if (!options.auth) setBoilerplate.createAppFileNoAuth();
-  else setBoilerplate.createAppFileAuth();
+// 	const questions = [];
 
-  //create server file in root of target directory
-  setBoilerplate.createServerFile();
+// 	if (!options.language) {
+// 		questions.push({
+// 			type: 'list',
+// 			name: 'language',
+// 			message: 'Please choose language for your project.',
+// 			choices: ['JavaScript', 'TypeScript'],
+// 			default: DEFAULT_LANGUANGE,
+// 		});
+// 	}
 
-  //setting up config.env file in root of target directory
-  setBoilerplate.setEnvFile();
+// 	if (!options.database) {
+// 		questions.push({
+// 			type: 'list',
+// 			name: 'database',
+// 			message: 'Please choose database for your project.',
+// 			choices: ['MongoDb', 'SQL (default to PostgreSQL)'],
+// 			default: DEFAULT_DATABASE,
+// 		});
+// 	}
 
-  //creating public/stylesheet/style.css boilerplate
-  setBoilerplate.createPublicBoilerplate();
+// 	if (!options.authentication) {
+// 		questions.push({
+// 			type: 'confirm',
+// 			name: 'authentication',
+// 			message: 'Do you want authentication setup?',
+// 			default: false,
+// 		});
+// 	}
 
-  //creating client js files for authentication
-  if (options.auth) setBoilerplate.createAuthClientJsFiles();
+// 	if (!options.git) {
+// 		questions.push({
+// 			type: 'confirm',
+// 			name: 'git',
+// 			message: 'Initialize a git repository?',
+// 			default: false,
+// 		});
+// 	}
 
-  //creating routes directory and boilerplate route file
-  if (options.auth) setBoilerplate.createRoutesDirAndBoilerplateRouteFileAuth();
-  else setBoilerplate.createRoutesDirAndBoilerplateRouteFileNoAuth();
+// 	if (!options.runInstall) {
+// 		questions.push({
+// 			type: 'confirm',
+// 			name: 'install',
+// 			message: 'Install npm packages?',
+// 			default: false,
+// 		});
+// 	}
 
-  //creating views directory and home.pug boilerplate view
-  setBoilerplate.createViewDirAndFile();
+// 	//return object with awnsers
+// 	let awnsers = await inquirer.prompt(questions);
 
-  //creating auth views signup and login
-  if (options.auth) setBoilerplate.creatingLoginAndSignupViews();
+// 	//parse awnsers
+// 	for (const key in awnsers) {
+// 		if (awnsers.hasOwnProperty(key)) {
+// 			if (typeof awnsers[key] === 'string')
+// 				awnsers[key] = awnsers[key].split(' ')[0].toLowerCase();
+// 		}
+// 	}
 
-  //creating forgot password and password reset views
-  if (options.auth) setBoilerplate.creatingPasswordResetViews();
+// 	return {
+// 		...options,
+// 		language: options.language || awnsers.language,
+// 		database: options.database || awnsers.database,
+// 		authentication: options.authentication || awnsers.authentication,
+// 		git: options.git || awnsers.git,
+// 		runInstall: options.install || awnsers.install,
+// 	};
+// };
 
-  //creating boilerplate email directory and template files in views dir
-  setBoilerplate.createEmailTemplatesDirAndFiles();
+export const cli = async (rawArgs, yargs) => {
+	const options = await new Options(rawArgs, yargs).getOptions();
 
-  //creating controllers directory with errorController.js
-  //and boilerplate homeControllers.js
-  setBoilerplate.createControllersDirAndBoilerControllers();
-
-  //if auth is true, create auth controllers
-  if (options.auth) setBoilerplate.createAuthControllers();
-
-  //create models directory
-  setBoilerplate.createModelsDirectory();
-
-  //if auth is true, create basic user model
-  if (options.auth) setBoilerplate.createUserModel();
-
-  //creating handler factory in controller directory
-  if (setBoilerplate.db === "mongo") {
-    setBoilerplate.createHanderFactory();
-  }
-
-  //creating util directory with boilerplate functions and classes
-  setBoilerplate.createUtilDirAndFuncs();
+	console.log(options);
 };
