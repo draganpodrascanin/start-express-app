@@ -18,9 +18,13 @@ export class Options {
 				'--git': Boolean,
 				'--install': Boolean,
 				'--typescript': Boolean,
+				'--databaseInit': Boolean,
 				'--database': String,
 				'--y': '--yes',
 				'--db': '--database',
+				'--dbInit': '--databaseInit',
+				'--database-init': '--database-init',
+				'--db-init': '--databaseInit',
 				'--auth': '--authentication',
 				'--a': '--authentication',
 				'--g': '--git',
@@ -28,11 +32,13 @@ export class Options {
 				'--ts': '--typescript',
 			},
 			{
+				permissive: true,
 				argv: this.rawArgs.slice(2),
 			}
 		);
 
-		if (this.yargs.database !== 'mongodb' || this.yargs.database !== 'sql')
+		//must be mongodb or sql if u set db in advance
+		if (this.yargs.database !== 'mongodb' && this.yargs.database !== 'sql')
 			this.yargs.database = undefined;
 
 		//setting up target directory path
@@ -47,6 +53,7 @@ export class Options {
 			skipPrompt: args['--yes'] || false,
 			git: args['--git'] || false,
 			language: (args['--typescript'] && 'typescript') || false, //set typescript, or later prompted, or defaulted to javascript
+			databaseInit: args['--databaseInit'] || false,
 			database: this.yargs.database || false,
 			authentication: args['--authentication'] || false,
 			runInstall: args['--install'] || false,
@@ -67,6 +74,24 @@ export class Options {
 			};
 		}
 
+		if (options.database) options.databaseInit = true;
+
+		const setupQuestions = [];
+
+		if (!options.databaseInit) {
+			setupQuestions.push({
+				type: 'confirm',
+				name: 'databaseInit',
+				message: 'Do you want database in your project?',
+				default: false,
+			});
+		}
+
+		let setupAwnser;
+
+		//if it isn't specified ask for setup questions
+		if (setupQuestions.length > 0)
+			setupAwnser = await inquirer.prompt(setupQuestions);
 		const questions = [];
 
 		if (!options.language) {
@@ -79,7 +104,10 @@ export class Options {
 			});
 		}
 
-		if (!options.database) {
+		if (
+			(options.databaseInit || (setupAwnser && setupAwnser.databaseInit)) &&
+			!options.database
+		) {
 			questions.push({
 				type: 'list',
 				name: 'database',
@@ -89,7 +117,10 @@ export class Options {
 			});
 		}
 
-		if (!options.authentication) {
+		if (
+			(options.databaseInit || (setupAwnser && setupAwnser.databaseInit)) &&
+			!options.authentication
+		) {
 			questions.push({
 				type: 'confirm',
 				name: 'authentication',
@@ -131,7 +162,8 @@ export class Options {
 			...options,
 			language: options.language || awnsers.language,
 			database: options.database || awnsers.database,
-			authentication: options.authentication || awnsers.authentication,
+			databaseInit: options.databaseInit || setupAwnser.databaseInit,
+			authentication: awnsers.authentication || options.authentication,
 			git: options.git || awnsers.git,
 			runInstall: options.install || awnsers.install,
 		};
