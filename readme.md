@@ -48,7 +48,7 @@ If you chose to have authentication setup at the start of the project, you will 
 <br>
 
 Sign up user. You should send: password, passwordConfirm, name and email.
-(lot of templates were worked on at differend times, so you can check /controllers/authcontroller.js to be sure. I'll try to controll this kind of stuff soon)
+(lot of templates were worked on at differend times, so you can check /controllers/authcontroller.js to be sure. I'll try to check for this kind of stuff soon)
 
 ```javascript
  {
