@@ -1,7 +1,7 @@
 {
   "name": "start-express-app",
   "version": "0.1.0",
-  "description": "Creating a starting point for express app.",
+  "description": "Easy to use cli to bootstrap your node-express project.",
   "main": "src/cli.js",
   "bin": {
     "@draganpodrascanin/start-express-app": "bin/create-project.js",

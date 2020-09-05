@@ -1,6 +1,6 @@
 # START EXPRESS APP
 
-## Easy to use cli to bootstrap your express project.
+## Easy to use cli to bootstrap your node-express project.
 
 ### Options:
 
@@ -14,7 +14,10 @@
 
 ## Usage
 
-Everything you need to do is install this package **globaly**
+Everything you need to do is install this package **globally** <br>
+```
+sudo npm i start-express-app -g
+```
 Then in your terminal run command
 
 ```
@@ -115,6 +118,13 @@ Reset users password. You should send new password and passwordConfirm.
  }
 ```
 
+## ORMs
+
+|                               |                 MONGO                 |                    SQL                    |
+|:-----------------------------:|:-------------------------------------:|:-----------------------------------------:|
+|           Javascript          |               Mongoose                |                 Sequelize                 |
+|           Typescript          |               Mongoose                |                  TypeORM                  |
+
 ## Views
 
-All views are rendered with PUG.
+All views are rendered with PUG atm.
