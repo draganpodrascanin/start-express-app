@@ -122,7 +122,7 @@ Reset users password. You should send new password and passwordConfirm.
 
 |                               |                 MONGO                 |                    SQL                    |
 |:-----------------------------:|:-------------------------------------:|:-----------------------------------------:|
-|           Javascript          |               Mongoose                |                 Sequelize                 |
+|           Javascript          |               Mongoose                |                 sequelize                 |
 |           Typescript          |               Mongoose                |                  TypeORM                  |
 
 ## Views
