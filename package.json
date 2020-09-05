@@ -1,6 +1,6 @@
 {
   "name": "start-express-app",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Creating a starting point for express app.",
   "main": "src/cli.js",
   "bin": {
