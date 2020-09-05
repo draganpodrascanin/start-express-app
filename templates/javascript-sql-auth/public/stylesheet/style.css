@@ -1,0 +1,180 @@
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  background: #eee;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.main {
+  max-width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.heading-primary {
+  color: #555555;
+  font-size: 45px;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+.links-container {
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.anchor {
+  font-size: 14px;
+  color: #999;
+  font-weight: 300;
+  transition: all 0.2s;
+}
+
+.anchor:hover {
+  cursor: pointer;
+  color: #666;
+}
+
+.nav {
+  height: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home {
+  text-decoration: none;
+  color: #999;
+  padding: 10px;
+  font-size: 18px;
+  margin-left: 30px;
+  font-weight: 200;
+}
+
+.nav-ul {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.nav-link {
+  height: 100%;
+  list-style: none;
+  padding: 10px;
+  margin: 0 10px;
+}
+
+.nav-link a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 300;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.nav-link a:hover {
+  cursor: pointer;
+  color: #444;
+}
+
+.form-container {
+  width: 90vw;
+  max-width: 500px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 10px 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-weight: 300;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  outline: none;
+  padding: 5px 10px;
+  font-size: 18px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  transition: all 0.2s;
+}
+
+.form-input:active,
+.form-input:hover {
+  outline: none;
+  border: 1px solid #333;
+}
+
+.btn-submit {
+  cursor: pointer;
+  font-size: 15px;
+  padding: 6px 12px;
+  color: #333;
+  border: 1px solid #999;
+  border-radius: 5px;
+  background-color: #def;
+  transition: all 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #cde;
+}
+
+#error {
+  margin-top: 10px;
+  font-size: 14px;
+  color: red;
+}
+
+#success {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #48de66;
+}
+
+.forgot-password-link {
+  text-decoration: none;
+  margin-left: 14px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #7799ee;
+  transition: all 0.2s;
+}
+.forgot-password-link:hover {
+  color: #5566bb;
+}

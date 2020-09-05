@@ -1,0 +1,60 @@
+[
+	{
+		"name": "development",
+		"type": "mysql",
+		"host": "localhost",
+		"port": 3306,
+		"username": "root",
+		"password": "kazakstan",
+		"database": "typeorm_auth_dev",
+		"logging": false,
+		"synchronize": true,
+		"entities": ["src/entity/**/*.ts"],
+		"migrations": ["src/migration/**/*.ts"],
+		"subscribers": ["src/subscriber/**/*.ts"],
+		"cli": {
+			"entitiesDir": "src/entity",
+			"migrationsDir": "src/migration",
+			"subscribersDir": "src/subscriber"
+		}
+	},
+	{
+		"name": "test",
+		"type": "mysql",
+		"host": "localhost",
+		"port": 3306,
+		"username": "root",
+		"password": "kazakstan",
+		"database": "typeorm_auth_test",
+		"logging": false,
+		"synchronize": true,
+		"migrationsRun": true,
+		"entities": ["src/entity/**/*.ts"],
+		"migrations": ["src/migration/**/*.ts"],
+		"subscribers": ["src/subscriber/**/*.ts"],
+		"cli": {
+			"entitiesDir": "src/entity",
+			"migrationsDir": "src/migration",
+			"subscribersDir": "src/subscriber"
+		}
+	},
+	{
+		"name": "production",
+		"type": "mysql",
+		"host": "localhost",
+		"port": 3306,
+		"username": "root",
+		"password": "kazakstan",
+		"database": "typeorm_auth_prod",
+		"logging": false,
+		"synchronize": true,
+		"entities": ["dist/entity/**/*.js"],
+		"migrations": ["dist/migration/**/*.js"],
+		"subscribers": ["dist/subscriber/**/*.js"],
+		"cli": {
+			"entitiesDir": "src/entity",
+			"migrationsDir": "src/migration",
+			"subscribersDir": "src/subscriber"
+		}
+	}
+]

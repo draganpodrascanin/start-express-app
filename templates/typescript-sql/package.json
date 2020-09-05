@@ -1,0 +1,32 @@
+{
+	"name": "typescript-sql",
+	"version": "0.0.1",
+	"description": "Awesome project developed with TypeORM.",
+	"devDependencies": {
+		"ts-node": "3.3.0",
+		"@types/node": "^8.0.29",
+		"typescript": "3.3.3333"
+	},
+	"dependencies": {
+		"@types/cookie-parser": "^1.4.2",
+		"@types/express": "^4.17.8",
+		"@types/nodemailer": "^6.4.0",
+		"cookie-parser": "^1.4.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-async-errors": "^3.1.1",
+		"html-to-text": "^5.1.1",
+		"mysql2": "^2.1.0",
+		"nodemailer": "^6.4.11",
+		"pug": "^3.0.0",
+		"reflect-metadata": "^0.1.10",
+		"ts-node-dev": "^1.0.0-pre.61",
+		"typeorm": "0.2.25"
+	},
+	"scripts": {
+		"start": "ts-node src/server.ts",
+		"start:dev": "ts-node-dev src/server.ts",
+		"start:prod": "NODE_ENV=production node dist/server.js",
+		"build": "tsc -p ."
+	}
+}

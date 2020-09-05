@@ -1,0 +1,23 @@
+extends base 
+
+block content
+    .form-container
+        h1.heading-primary Sign Up
+        form.form#loginform 
+            .form-group
+                label.form-label(for='name') Enter your full name    
+                input.form-input#name(type="input", placeholder='John Doe', required )
+            .form-group
+                label.form-label(for='email') Enter your email    
+                input.form-input#email(type="email", placeholder='example@gmail.com', required )
+            .form-group
+                label.form-label(for='password') Enter your password    
+                input.form-input#password(type="password", placeholder='••••••••••', required )
+            .form-group
+                label.form-label(for='passwordConfirm') Enter your password    
+                input.form-input#passwordConfirm(type="password", placeholder='••••••••••', required )
+            input.btn-submit(type="submit")
+            #error
+
+block scripts
+    script(src="/javascript/signup.js")
