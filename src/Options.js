@@ -112,7 +112,7 @@ export class Options {
 				type: 'list',
 				name: 'database',
 				message: 'Please choose database for your project.',
-				choices: ['MongoDb', 'SQL (default to PostgreSQL)'],
+				choices: ['MongoDb', 'SQL (default to mysql)'],
 				default: DEFAULT_DATABASE,
 			});
 		}
