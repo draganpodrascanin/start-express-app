@@ -24,17 +24,17 @@ start-express-app myapp
 You will then be promped with questions:
 * Do you want DB in your project? (y/N): 
 * Please choose the language for your project:
-⋅⋅* Javascrypt
-⋅⋅* Typescrypt
+  * Javascrypt
+  * Typescrypt
 * Please choose database for your project: (if you chose that you want one)
-⋅⋅* MongoDB
-⋅⋅* SQL (default to mysql)
+  * MongoDB
+  * SQL (default to mysql)
 * Do you want authentication setup? (y/N)
 * Initialize a git repository? (y/N)
 * Install npm packages? (y/N)
 
 
-**And you're done**
+**And you're done** <br>
 *don't forget to change environment variables before you start coding*
 
 ## API endpoints
