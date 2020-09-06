@@ -1,6 +1,6 @@
 # START EXPRESS APP
 
-## Easy to use cli to bootstrap your node-express project.
+## Easy to use cli to bootstrap your node.js-express project.
 
 ### Options:
 
