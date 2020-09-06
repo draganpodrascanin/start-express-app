@@ -26,7 +26,7 @@ Then in your terminal you can run command
 start-express-app myapp
 ```
 
-myapp - directory you want to start your project in. <br>
+_myapp - directory you want to start your project in._ <br>
 
 You will be promped with these questions:
 
