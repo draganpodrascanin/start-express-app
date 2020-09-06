@@ -6,7 +6,7 @@
 
 |           Language            |                                      Database                                      |
 |:-----------------------------:|:----------------------------------------------------------------------------------:|
-| Javascript :heavy_check_mark: |                             MogoDb :heavy_check_mark:                              |
+| Javascript :heavy_check_mark: |                             MongoDb :heavy_check_mark:                             |
 | Typescript :heavy_check_mark: | SQL(default to mysql, but it's very easy to change to whatever) :heavy_check_mark: |
 
 **Authentication** - <br>
@@ -37,7 +37,7 @@ You will then be promped with questions:
 * Install npm packages? (y/N)
 
 
-**And you're done** <br>
+**And you're done!** <br>
 *don't forget to change environment variables before you start coding*
 
 ## API endpoints
@@ -46,7 +46,7 @@ If you chose to have authentication setup at the start of the project, you will 
 
 <br>
 
-**POST /api/v1/user**
+**POST /api/v1/users**
 
 <br>
 
@@ -64,7 +64,7 @@ Sign up user. You should send: password, passwordConfirm, name and email.
 
 <br>
 
-**POST /api/v1/user/login**
+**POST /api/v1/users/login**
 
 <br>
 
