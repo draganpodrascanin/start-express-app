@@ -41,7 +41,14 @@
 		"nodejs-cli",
 		"nodejs-api-cli",
 		"app",
-		"generator"
+		"generator",
+		"node express",
+		"node start",
+		"node authentication",
+		"node express auth",
+		"authentication",
+		"node auth",
+		"auth"
 	],
 	"author": "Dragan Podrascanin",
 	"license": "MIT",

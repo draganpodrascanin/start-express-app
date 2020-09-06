@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 // import CustomError from './utils/CustomError.js'
+import 'express-async-errors';
 
 import viewsRoutes from './routes/viewsRouter.js';
 
