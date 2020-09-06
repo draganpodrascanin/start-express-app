@@ -2,14 +2,13 @@ import 'reflect-metadata';
 import createDBConnection from './utils/create-typeorm-connection';
 import app from './app';
 import dotenv from 'dotenv';
-import { getConnection } from 'typeorm';
+
 dotenv.config({ path: 'config.env' });
 const env = process.env.NODE_ENV;
 if (!env) {
-	console.log('CRITICAL ERROR SET YOUR ENV VARIABLES, EXITING APP NOW');
+	console.log('ERROR SET YOUR ENV VARIABLES, EXITING APP NOW');
 	process.exit(1);
 }
-console.log('NODE_ENV = ', env);
 
 const bootstrap = async () => {
 	//CONNECT TO DB if fail exit app
@@ -19,7 +18,7 @@ const bootstrap = async () => {
 		// await connection.synchronize();
 		console.log('connected to db..');
 	} catch (err) {
-		console.log("couln't connect to DB, exiting app...", err);
+		console.log("couldn't connect to DB...", err);
 	}
 
 	const PORT = process.env.PORT || 8000;

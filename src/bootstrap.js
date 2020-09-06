@@ -44,7 +44,7 @@ export class Bootstrap {
 	async copyTemplateFiles() {
 		const templateDirectory = this.getTemplateDir();
 
-		//if directory is specified and doesn't exist, make one
+		//if directory is specified and doesn't exist, make one.
 		if (!fs.existsSync(templateDirectory)) {
 			//create directory
 			fs.mkdirSync(templateDirectory);

@@ -1,8 +1,12 @@
 //render home page
-exports.homeController = (req, res, next) => {
-  res.status(200).render('../views/home.pug');
-};
+class ViewController {
+	home = (req, res, next) => {
+		res.status(200).render('home.pug');
+	};
 
-exports.NotFound404Controller = (req, res, next) => {
-  res.status(404).render('../views/404.pug');
-};
+	NotFound404 = (req, res, next) => {
+		res.status(404).render('404.pug');
+	};
+}
+
+export default new ViewController();

@@ -1,7 +1,7 @@
 {
-	"name": "typescript-sql",
+	"name": "start-express-app",
 	"version": "0.0.1",
-	"description": "Awesome project developed with TypeORM.",
+	"description": "App Bootstrapped with start-express-app",
 	"devDependencies": {
 		"ts-node": "3.3.0",
 		"@types/node": "^8.0.29",
@@ -28,5 +28,8 @@
 		"start:dev": "ts-node-dev src/server.ts",
 		"start:prod": "NODE_ENV=production node dist/server.js",
 		"build": "tsc -p ."
-	}
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
 }

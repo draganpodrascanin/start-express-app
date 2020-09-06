@@ -1,7 +1,7 @@
-import { homeController } from '../controllers/viewsControllers';
+import viewsController from '../controllers/ViewsController';
 
 const router = require('express').Router();
 
-router.route('/').get(homeController);
+router.route('/').get(viewsController.home);
 
 export default router;

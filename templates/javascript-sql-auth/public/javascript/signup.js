@@ -1,9 +1,16 @@
-const form = document.querySelector('#loginform');
+const form = document.querySelector('#signupform');
 
-const signUp = async (name, email, password, passwordConfirm) => {
+const signUp = async (
+	firstName,
+	lastName,
+	email,
+	password,
+	passwordConfirm
+) => {
 	try {
-		const res = await axios.post('http://localhost:8000/api/v1/users/signUp', {
-			name,
+		const res = await axios.post('http://localhost:8000/api/v1/users', {
+			firstName,
+			lastName,
 			email,
 			password,
 			passwordConfirm,
@@ -25,6 +32,7 @@ form.addEventListener('submit', (e) => {
 	const email = document.getElementById('email').value;
 	const password = document.getElementById('password').value;
 	const passwordConfirm = document.getElementById('passwordConfirm').value;
-	const name = document.getElementById('name').value;
-	signUp(name, email, password, passwordConfirm);
+	const firstName = document.getElementById('firstName').value;
+	const lastName = document.getElementById('lastName').value;
+	signUp(firstName, lastName, email, password, passwordConfirm);
 });

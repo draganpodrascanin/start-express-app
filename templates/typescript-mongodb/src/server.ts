@@ -10,10 +10,7 @@ const bootstrap = async () => {
     !process.env.DATABASE_CONNECTION_STRING ||
     !process.env.DATABASE_PASSWORD ||
     !process.env.DATABASE_USERNAME ||
-    !process.env.DATABASE_NAME ||
-    !process.env.JWT_SECRET ||
-    !process.env.JWT_EXPIRES_IN ||
-    !process.env.JWT_COOKIE_EXPIRES_IN
+    !process.env.DATABASE_NAME
   ) {
     console.log('Missing information for connecting to DB');
     process.exit(1);

@@ -1,12 +1,12 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-// const AppError = require('./utils/AppError.js');
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+// import CustomError from './utils/CustomError.js'
 
-const viewsRoutes = require('./routes/viewsRouter.js');
+import viewsRoutes from './routes/viewsRouter.js';
 
-const errorController = require('./controllers/errorController.js');
-const { NotFound404Controller } = require('./controllers/viewsControllers.js');
+import errorController from './controllers/errorController.js';
+import viewController from './controllers/viewsControllers.js';
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/', viewsRoutes);
-app.use('*', NotFound404Controller);
+app.use('*', viewController.NotFound404);
 
 app.use(errorController);
 

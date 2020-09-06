@@ -40,8 +40,8 @@ class User extends Model {
 
 	changedPasswordAfter(date) {
 		const iat = new Date(date);
-
-		if (this.passwordChangedAt > iat) return true;
+		if (!this.passwordChangedAt) return false;
+		return this.passwordChangedAt > iat;
 	}
 }
 
@@ -64,7 +64,11 @@ User.init(
 				isEmail: true,
 			},
 		},
-		name: {
+		firstName: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		lastName: {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},

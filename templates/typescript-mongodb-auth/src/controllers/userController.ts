@@ -1,26 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
 import User from '../models/User';
-import AppError from '../utils/AppError';
+// import CustomError from '../utils/CustomError';
 
-export const getAllUsersController = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const allUsers = await User.find();
+class UserController {
+  public getAllUsers = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const allUsers = await User.find();
 
-  res.status(200).json({
-    status: 'success',
-    data: allUsers,
-  });
-};
-
-export const currentUserController = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { user } = req;
-
-  res.send({ data: user || null });
-};
+    res.status(200).json({
+      status: 'success',
+      data: allUsers,
+    });
+  };
+}
+export default new UserController();

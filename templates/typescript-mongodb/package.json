@@ -1,12 +1,12 @@
 {
-  "name": "typescript",
+  "name": "start-express-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "App Bootstrapped with start-express-app",
+  "main": "server.js",
   "scripts": {
-    "start": "ts-node-dev src/server.ts",
+    "start": "ts-node src/server.ts",
     "start:dev": "ts-node-dev --poll src/server.ts",
-    "start:prod": "NODE_ENV=production node src/server.js",
+    "start:prod": "NODE_ENV=production node dist/server.js",
     "test": "jest --watchAll --no-cache",
     "build": "tsc -p .",
     "debug": "ndb server.js"

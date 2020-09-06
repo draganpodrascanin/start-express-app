@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import CustomError from './utils/CustomError';
 
 import viewsRoutes from './routes/views-routes';
-import ViewsController from './controllers/ViewsController';
+import viewsController from './controllers/ViewsController';
 import ErrorController from './controllers/ErrorController';
 
 const app = express();
@@ -27,7 +27,7 @@ app.use('/api/v1/*', (req, res, next) => {
 });
 
 app.use('/', viewsRoutes);
-app.use('*', ViewsController.NotFound404View);
+app.use('*', viewsController.NotFound404View);
 
 app.use(ErrorController);
 

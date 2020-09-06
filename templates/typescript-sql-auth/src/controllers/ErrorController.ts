@@ -1,6 +1,14 @@
 import CustomError from '../utils/CustomError';
 import { Request, Response, NextFunction } from 'express';
 
+declare global {
+	interface Error {
+		statusCode?: number;
+		status?: string;
+		isOperational?: boolean;
+	}
+}
+
 const handleDuplicateEntry = (err: any) => {
 	const what = err.sqlMessage.split("'")[1];
 	return new CustomError(
@@ -23,25 +31,23 @@ export default (
 ) => {
 	// console.log(err);
 	let error;
-
 	//check for DB and other known errors that aren't made by us
-	if (!(err instanceof CustomError)) error = checkForKownErrors(err) as Error;
-	if (!error) error = err;
+	if (!err.isOperational) error = checkForKownErrors(err) as CustomError;
+	else error = { ...err, message: err.message } as Error;
 
+	console.log('err', err);
+	console.log('error', error);
 	if (
 		process.env.NODE_ENV === 'development' ||
 		process.env.NODE_ENV === 'test'
 	) {
-		console.log(error.message);
-
-		//if we're in development and it's our custom message
-		if (error instanceof CustomError)
+		if (error.isOperational) {
 			return res.status(error.statusCode || 500).json({
-				status: error.status,
+				status: error.status || 'error',
 				message: error.message,
 				err: error,
-				stack: error.stack,
 			});
+		}
 
 		//if we're in development and it's not our error
 		return res.status(500).json({
@@ -55,7 +61,7 @@ export default (
 
 	//if our custom error, send status (failed or error) and error message
 	if (error instanceof CustomError) {
-		return res.status(error.statusCode).json({
+		return res.status(error.statusCode!).json({
 			status: error.status,
 			message: error.message,
 		});

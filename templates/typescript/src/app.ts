@@ -1,9 +1,10 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import 'express-async-errors';
 
 import viewsRoutes from './routes/viewsRoutes';
-import { showNotFound404Controller } from './controllers/viewsControllers';
+import viewController from './controllers/viewsController';
 
 const app = express();
 
@@ -19,6 +20,6 @@ app.use(cookieParser());
 
 app.use('/', viewsRoutes);
 
-app.use('*', showNotFound404Controller);
+app.use('*', viewController.showNotFound404);
 
 export default app;

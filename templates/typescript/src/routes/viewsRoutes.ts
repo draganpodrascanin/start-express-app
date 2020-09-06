@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { showIndexController } from '../controllers/viewsControllers';
+import viewController from '../controllers/viewsController';
 
 const route = Router();
 
-route.route('/').get(showIndexController);
+route.route('/').get(viewController.showIndex);
 
 export default route;

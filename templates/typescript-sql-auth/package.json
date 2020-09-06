@@ -1,7 +1,7 @@
 {
-	"name": "typescript-sql",
+	"name": "start-express-app",
 	"version": "0.0.1",
-	"description": "Awesome project developed with TypeORM.",
+	"description": "App Bootstrapped with start-express-app",
 	"devDependencies": {
 		"@types/jest": "^26.0.13",
 		"@types/node": "^8.0.29",

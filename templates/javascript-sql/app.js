@@ -4,14 +4,14 @@ import 'express-async-errors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 
-// import AppError from './utils/AppError.js'
+// import CustomError from './utils/CustomError.js'
 
 import viewsRoutes from './routes/viewsRouter';
 import userRoutes from './routes/userRoutes';
 
 import errorController from './controllers/errorController';
 // const errorController = require('./controllers/errorController.js');
-const { NotFound404Controller } = require('./controllers/viewsControllers.js');
+import viewsController from './controllers/ViewsController';
 
 const app = express();
 
@@ -27,11 +27,11 @@ app.use(cookieParser());
 app.use('/api/v1/users', userRoutes);
 //not found api route
 app.use('/api/v1/*', (req, res, next) => {
-	next(new AppError(`can't find ${req.originalUrl} on this server`, 404));
+	next(new CustomError(`can't find ${req.originalUrl} on this server`, 404));
 });
 
 app.use('/', viewsRoutes);
-app.use('*', NotFound404Controller);
+app.use('*', viewsController.NotFound404);
 
 app.use(errorController);
 

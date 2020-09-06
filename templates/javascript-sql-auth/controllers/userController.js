@@ -1,30 +1,34 @@
 import User from '../models/User';
-import AppError from '../utils/AppError';
+import CustomError from '../utils/CustomError';
 
-export const createNewUserController = async (req, res, next) => {
-	const { email, password, name } = req.body;
+class UserController {
+	createNewUser = async (req, res, next) => {
+		const { email, password, name } = req.body;
 
-	const newUser = await User.create({ email, password, name });
+		const newUser = await User.create({ email, password, name });
 
-	if (!newUser) {
-		throw new AppError('please provide valid username and password', 400);
-	}
+		if (!newUser) {
+			throw new CustomError('please provide valid username and password', 400);
+		}
 
-	res.status(201).json({
-		status: 'success',
-		data: newUser,
-	});
-};
+		res.status(201).json({
+			status: 'success',
+			data: newUser,
+		});
+	};
 
-export const getAllUsersController = async (req, res, next) => {
-	const allUsers = await User.findAll();
+	getAllUsers = async (req, res, next) => {
+		const allUsers = await User.findAll();
 
-	if (!allUsers) {
-		throw new AppError('error with getting all users', 500);
-	}
+		if (!allUsers) {
+			throw new CustomError('error with getting all users', 500);
+		}
 
-	res.status(200).json({
-		status: 'success',
-		data: allUsers,
-	});
-};
+		res.status(200).json({
+			status: 'success',
+			data: allUsers,
+		});
+	};
+}
+
+export default new UserController();

@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import ViewsController from '../controllers/ViewsController';
+import viewsController from '../controllers/ViewsController';
 
 const router = Router();
 
-router.get('/', ViewsController.home);
+router.get('/', viewsController.home);
 
 export default router;

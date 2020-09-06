@@ -8,6 +8,14 @@ class User extends Model {}
 User.init(
 	{
 		// Model attributes are defined here
+		firstName: {
+			type: DataTypes.STRING(100),
+			allowNull: false,
+		},
+		lastName: {
+			type: DataTypes.STRING(100),
+			allowNull: false,
+		},
 		email: {
 			type: DataTypes.STRING(100),
 			unique: true,

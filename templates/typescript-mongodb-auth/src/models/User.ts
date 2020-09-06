@@ -2,18 +2,19 @@ import mongoose, { Schema } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
-import { runInThisContext } from 'vm';
 
 //attributes that are required to make a new User
 export interface UserAttributes {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }
 
 //interface that describes properties that a User DOCUMENT(instance) has
 export interface UserDocument extends mongoose.Document {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   passwordChangedAt?: Date;
@@ -36,11 +37,15 @@ interface UserModel extends mongoose.Model<UserDocument /* */> {
   correctPassword(
     providedPass: string,
     userPassword: UserDocument['password']
-  ): boolean;
+  ): Promise<boolean>;
 }
 
 const userSchema: Schema = new mongoose.Schema<UserDocument>({
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
     type: String,
     required: true,
   },
