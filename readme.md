@@ -121,7 +121,7 @@ Reset users password. You should send new password and passwordConfirm.
  }
 ```
 
-## ORMs
+## ODMs/ORMs
 
 |            |  MONGO   |    SQL    |
 | :--------: | :------: | :-------: |
