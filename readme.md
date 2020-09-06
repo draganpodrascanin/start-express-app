@@ -14,7 +14,7 @@ You can choose to have basic authentication finished at the start of the project
 
 ## Usage
 
-Everything you need to do is install this package **globally** <br>
+Everything you need to do is install this package **globally**. <br>
 
 ```
 npm i start-express-app -g
