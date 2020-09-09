@@ -1,6 +1,6 @@
 {
 	"name": "start-express-app",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"description": "Easy to use cli to bootstrap your node-express project.",
 	"main": "src/cli.js",
 	"bin": {
@@ -37,7 +37,6 @@
 		"project",
 		"nodejs",
 		"node",
-		"scaffold",
 		"nodejs-cli",
 		"nodejs-api-cli",
 		"app",
@@ -45,10 +44,12 @@
 		"node express",
 		"node start",
 		"node authentication",
-		"node express auth",
+		"javascript",
+		"typescript",
 		"authentication",
 		"node auth",
-		"auth"
+		"auth",
+		"server"
 	],
 	"author": "Dragan Podrascanin",
 	"license": "MIT",

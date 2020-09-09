@@ -30,14 +30,13 @@ export class Bootstrap {
 		)
 			template += '-auth';
 
-		console.log('template == ', template);
-		const templateDir = path.resolve(
+		let templateDir = path.resolve(
 			new URL(currentFileUrl).pathname,
 			'../../templates',
 			template.toLowerCase()
 		);
 
-		console.log(templateDir);
+		if (templateDir.startsWith('C:\\C:\\')) templateDir = templateDir.slice(3);
 		return templateDir;
 	}
 

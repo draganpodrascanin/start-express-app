@@ -2,6 +2,9 @@
 
 ## Easy to use cli to bootstrap your node.js-express project.
 
+_required node version 12.0.0+_
+<br>
+
 ### Options:
 
 |           Language            |                 Database                 |
@@ -14,13 +17,19 @@ You can choose to have basic authentication finished at the start of the project
 
 ## Usage
 
-Everything you need to do is install this package **globally**. <br>
+Usage with npx:
+
+```
+npx start-express-app myapp
+```
+
+Alternatively you can install this package **globally**. <br>
 
 ```
 npm i start-express-app -g
 ```
 
-Then in your terminal you can run command
+Then in your terminal you have access to run command
 
 ```
 start-express-app myapp
