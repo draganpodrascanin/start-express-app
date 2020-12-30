@@ -1,32 +1,36 @@
-//render home page
-export const homeController = (req, res, next) => {
-	res.status(200).render('../views/home.pug');
-};
+class ViewController {
+	//render home page
+	home = (req, res, next) => {
+		res.status(200).render('../views/home.pug');
+	};
 
-//render login page
-export const showLogin = (req, res, next) => {
-	res.status(200).render('../views/login.pug');
-};
+	//render login page
+	showLogin = (req, res, next) => {
+		res.status(200).render('../views/login.pug');
+	};
 
-//render signup page
-export const showSignup = (req, res, next) => {
-	res.status(200).render('../views/signup.pug');
-};
+	//render signup page
+	showSignup = (req, res, next) => {
+		res.status(200).render('../views/signup.pug');
+	};
 
-//forgot password page
-export const showForgotPassword = (req, res, next) => {
-	res.status(200).render('../views/forgotPassword.pug');
-};
+	//forgot password page
+	showForgotPassword = (req, res, next) => {
+		res.status(200).render('../views/forgotPassword.pug');
+	};
 
-export const showResetPassword = (req, res, next) => {
-	res.status(200).render('../views/resetPassword.pug');
-};
+	showResetPassword = (req, res, next) => {
+		res.status(200).render('../views/resetPassword.pug');
+	};
 
-export const showProfile = (req, res, next) => {
-	res.status(200).render('../views/profile.pug');
-};
+	showProfile = (req, res, next) => {
+		res.status(200).render('../views/profile.pug');
+	};
 
-//404 view
-export const NotFound404ViewController = (req, res, next) => {
-	res.status(200).render('../views/404.pug');
-};
+	//404 view
+	NotFound404 = (req, res, next) => {
+		res.status(200).render('../views/404.pug');
+	};
+}
+
+export default new ViewController();

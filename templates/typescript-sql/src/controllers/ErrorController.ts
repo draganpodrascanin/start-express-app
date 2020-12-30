@@ -1,7 +1,24 @@
 import CustomError from '../utils/CustomError';
 import { Request, Response, NextFunction } from 'express';
 
-const checkForKownErrors = (err: Error): Error => {
+declare global {
+	interface Error {
+		statusCode?: number;
+		status?: string;
+		isOperational?: boolean;
+	}
+}
+
+const handleDuplicateEntry = (err: any) => {
+	const what = err.sqlMessage.split("'")[1];
+	return new CustomError(
+		`${what} is duplicate entry, this field must be unique`,
+		400
+	);
+};
+
+const checkForKownErrors = (err: any): Error => {
+	if (err.code === 'ER_DUP_ENTRY') return handleDuplicateEntry(err);
 	//add DB and other known errors that arent made by us
 	return err;
 };
@@ -12,9 +29,11 @@ export default (
 	res: Response,
 	next: NextFunction
 ) => {
-	let error = { ...err };
+	let error;
 	//check for DB and other known errors that aren't made by us
-	if (!(err instanceof CustomError)) error = checkForKownErrors(err) as Error;
+	if (!(err instanceof CustomError))
+		error = checkForKownErrors(err) as CustomError;
+	else error = { ...err, message: err.message };
 
 	if (
 		process.env.NODE_ENV === 'development' ||
@@ -23,7 +42,7 @@ export default (
 		console.error(error.message);
 
 		//if we're in development and it's our custom message
-		if (error instanceof CustomError)
+		if (error.isOperational)
 			return res.status(error.statusCode || 500).json({
 				status: error.status,
 				message: error.message,
@@ -42,8 +61,8 @@ export default (
 	// ELSE WE'RE IN PRODUCTION
 
 	//if our custom error send status (failed or error) and error message
-	if (error instanceof CustomError) {
-		return res.status(error.statusCode).json({
+	if (error.isOperational) {
+		return res.status(error.statusCode || 500).json({
 			status: error.status,
 			message: error.message,
 		});

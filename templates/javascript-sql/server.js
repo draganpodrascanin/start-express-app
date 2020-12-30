@@ -8,7 +8,7 @@ dotenv.config({ path: './config.env' });
 const app = require('./app');
 //db
 const { sequelize } = require('./utils/database');
-const { default: User } = require('./models/User');
+
 //check if connected to DB if yes, start app, if not console error
 const checkDB = async () => {
 	try {
@@ -17,13 +17,12 @@ const checkDB = async () => {
 			//force sync with models if in development
 			force: process.env.NODE_ENV === 'development',
 		});
-		console.log('is model User? -- ', User === sequelize.model.User);
 		// await User.sync();
-		console.log('Connection to db has been established successfully.');
+		console.log('Connected to db..');
 
-		const port = process.env.PORT || 5000;
-		app.listen(port, () => {
-			console.log(`App running on port ${port}...`);
+		const PORT = process.env.PORT || 5000;
+		app.listen(PORT, () => {
+			console.log(`App running on port ${PORT}...`);
 		});
 	} catch (error) {
 		console.error('Unable to connect to the database:', error);

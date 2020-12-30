@@ -12,17 +12,17 @@ html
     
     .nav
       a.home(href="/") HOME
-      ul.nav-ul
-        if user
-          li.nav-link
-            a#logout(href="#") LogOut
-          li.nav-link
-            a(href=`/profile`) My Profile
-        else
-          li.nav-link
-            a(href="/login") Log in
-          li.nav-link
-            a(href=`/signup`) Sign up
+      //- ul.nav-ul
+      //-   if user
+      //-     li.nav-link
+      //-       a#logout(href="#") LogOut
+      //-     li.nav-link
+      //-       a(href=`/profile`) My Profile
+      //-   else
+      //-     li.nav-link
+      //-       a(href="/login") Log in
+      //-     li.nav-link
+      //-       a(href=`/signup`) Sign up
     block content
 
     script(src="/javascript/axios.js")

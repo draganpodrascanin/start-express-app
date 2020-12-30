@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer');
-const pug = require('pug');
-const htmlToText = require('html-to-text');
+import nodemailer from 'nodemailer';
+import pug from 'pug';
+import htmlToText from 'html-to-text';
 
 /*
     this class is made mainly to send
@@ -12,65 +12,54 @@ const htmlToText = require('html-to-text');
     and has methods for sending specific emails
 */
 
-module.exports = class Email {
-  constructor(user, url) {
-    this.to = user.email;
-    this.url = url;
-    this.from = `Start Express App <${process.env.EMAIL_FROM}>`;
-  }
+export default class Email {
+	from = `Start Express App <${process.env.EMAIL_FROM}>`;
 
-  newTransport() {
-    //you don't have to use sendgrid ofcourse
-    if (process.env.NODE_ENV === 'production') {
-      // Sendgrid
-      return nodemailer.createTransport({
-        service: 'SendGrid',
-        auth: {
-          user: process.env.SENDGRID_USERNAME,
-          pass: process.env.SENDGRID_PASSWORD
-        }
-      });
-    }
+	constructor(user) {
+		this.to = user.email;
+	}
 
-    return nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
-      auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD
-      }
-    });
-  }
+	newTransport() {
+		//you don't have to use sendgrid of course
+		if (process.env.NODE_ENV === 'production') {
+			// Sendgrid
+			return nodemailer.createTransport({
+				service: 'SendGrid',
+				auth: {
+					user: process.env.SENDGRID_USERNAME,
+					pass: process.env.SENDGRID_PASSWORD,
+				},
+			});
+		}
 
-  // Send the email method
-  async send(template, subject) {
-    // 1) Render HTML based on a pug template
-    const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
-      url: this.url,
-      subject
-    });
+		return nodemailer.createTransport({
+			host: process.env.EMAIL_HOST,
+			port: process.env.EMAIL_PORT,
+			auth: {
+				user: process.env.EMAIL_USERNAME,
+				pass: process.env.EMAIL_PASSWORD,
+			},
+		});
+	}
 
-    // 2) Define email options
-    const mailOptions = {
-      from: this.from,
-      to: this.to,
-      subject,
-      html,
-      text: htmlToText.fromString(html)
-    };
+	// Send the email method
+	async send(template, subject, options) {
+		// 1) Render HTML based on a pug template
+		const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
+			subject,
+			...options,
+		});
 
-    // 3) Create a transport and send email
-    await this.newTransport().sendMail(mailOptions);
-  }
+		// 2) Define email options
+		const mailOptions = {
+			from: this.from,
+			to: this.to,
+			subject,
+			html,
+			text: htmlToText.fromString(html),
+		};
 
-  async sendWelcome() {
-    await this.send('welcome', 'Welcome to my express app!');
-  }
-
-  async sendPasswordReset() {
-    await this.send(
-      'passwordReset',
-      'Your password reset token (valid for only 10 minutes)'
-    );
-  }
-};
+		// 3) Create a transport and send email
+		await this.newTransport().sendMail(mailOptions);
+	}
+}

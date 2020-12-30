@@ -1,41 +1,57 @@
 # START EXPRESS APP
 
-## Easy to use cli to bootstrap your express project.
+## Easy to use cli to bootstrap your node.js-express project.
+
+_required node version 12.0.0+_
+<br>
 
 ### Options:
 
-|           Language            |                                      Database                                      |
-|:-----------------------------:|:----------------------------------------------------------------------------------:|
-| Javascript :heavy_check_mark: |                             MogoDb :heavy_check_mark:                              |
-| Typescript :heavy_check_mark: | SQL(default to mysql, but it's very easy to change to whatever) :heavy_check_mark: |
+|           Language            |                 Database                 |
+| :---------------------------: | :--------------------------------------: |
+| Javascript :heavy_check_mark: |        MongoDb :heavy_check_mark:        |
+| Typescript :heavy_check_mark: | SQL(default to mysql) :heavy_check_mark: |
 
 **Authentication** - <br>
-  You can choose to have basic authentication finished at the start of the project. Only JWT authentication is available at the moment.
+You can choose to have basic authentication finished at the start of the project. Only JWT authentication is available at the moment.
 
 ## Usage
 
-Everything you need to do is install this package **globaly**
-Then in your terminal run command
+Usage with npx:
+
+```
+npx start-express-app myapp
+```
+
+Alternatively you can install this package **globally**. <br>
+
+```
+npm i start-express-app -g
+```
+
+Then in your terminal you have access to run command
 
 ```
 start-express-app myapp
 ```
 
-You will then be promped with questions:
-* Do you want DB in your project? (y/N): 
-* Please choose the language for your project:
-  * Javascrypt
-  * Typescrypt
-* Please choose database for your project: (if you chose that you want one)
-  * MongoDB
-  * SQL (default to mysql)
-* Do you want authentication setup? (y/N)
-* Initialize a git repository? (y/N)
-* Install npm packages? (y/N)
+_myapp - directory you want to start your project in._ <br>
 
+You will be promped with these questions:
 
-**And you're done** <br>
-*don't forget to change environment variables before you start coding*
+- Do you want DB in your project? (y/N):
+- Please choose the language for your project:
+  - Javascrypt
+  - Typescrypt
+- Please choose database for your project: (if you chose that you want one)
+  - MongoDB
+  - SQL (default to mysql)
+- Do you want authentication setup? (y/N)
+- Initialize a git repository? (y/N)
+- Install npm packages? (y/N)
+
+**And you're done!** <br>
+_don't forget to change environment variables (and ormconfig.json if you have it) before you start coding_
 
 ## API endpoints
 
@@ -43,25 +59,25 @@ If you chose to have authentication setup at the start of the project, you will 
 
 <br>
 
-**POST /api/v1/user**
+**POST /api/v1/users**
 
 <br>
 
-Sign up user. You should send: password, passwordConfirm, name and email.
-(lot of templates were worked on at differend times, so you can check /controllers/authcontroller.js to be sure. I'll try to check for this kind of stuff soon)
+Sign up user. You should send: password, passwordConfirm, firstName, lastName and email.
 
 ```javascript
  {
    email: 'valid@email.com',
    password: 'password',
    passwordConfrim: 'password',
-   name: 'Valid Name'
+   firstName: 'John',
+   lastName: 'Doe'
  }
 ```
 
 <br>
 
-**POST /api/v1/user/login**
+**POST /api/v1/users/login**
 
 <br>
 
@@ -90,14 +106,13 @@ Responds with empty jwt cookie, effectively logging you out.
 
 <br>
 
-
 Send email for reseting password. You should sand a valid email.
 Responds with status 200 , and send email for your password reset.
 
 ```javascript
- {
-   email: 'valid@email.com'
- }
+{
+	email: 'valid@email.com';
+}
 ```
 
 <br>
@@ -115,6 +130,13 @@ Reset users password. You should send new password and passwordConfirm.
  }
 ```
 
+## ODMs/ORMs
+
+|            |  MONGO   |    SQL    |
+| :--------: | :------: | :-------: |
+| Javascript | Mongoose | Sequelize |
+| Typescript | Mongoose |  TypeORM  |
+
 ## Views
 
-All views are rendered with PUG.
+All views are rendered with PUG atm.

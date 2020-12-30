@@ -1,11 +1,8 @@
-import {
-	createNewUserController,
-	getAllUsersController,
-} from '../controllers/userController';
+import userController from '../controllers/UserController';
 
 const router = require('express').Router();
 
-router.route('/').get(getAllUsersController);
-router.route('/').post(createNewUserController);
+router.route('/').get(userController.getAllUsers);
+router.route('/').post(userController.createNewUser);
 
 export default router;

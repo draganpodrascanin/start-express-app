@@ -7,7 +7,8 @@ it(`returns status 400 on /a POSTpi/v1/users (signupController)
   const res = await request(app)
     .post('/api/v1/users')
     .send({
-      name: 'valid name',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'valid2@email.com',
       password: 'password',
       passwordConfirm: 'different password',
@@ -20,7 +21,8 @@ it(`returns status 400 on POST /api/v1/users
   return request(app)
     .post('/api/v1/users')
     .send({
-      name: 'valid name',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'notanemai',
       password: 'password',
       passwordConfirm: 'password',
@@ -32,7 +34,8 @@ it(`returns status 400 on POST /api/v1/users
     (signupController) duplicate email(must be unique)`, async () => {
   const user = User.build({
     email: 'double@email.com',
-    name: 'valid name',
+    firstName: 'John',
+    lastName: 'Doe',
     password: 'password',
   });
 
@@ -41,7 +44,8 @@ it(`returns status 400 on POST /api/v1/users
   return request(app)
     .post('/api/v1/users')
     .send({
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       password: 'password',
       passwordConfirm: 'password',
@@ -55,7 +59,8 @@ it(`returns status 201 on POST /api/v1/users
   const response = await request(app)
     .post('/api/v1/users')
     .send({
-      name: 'valid name',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'valid@email.com',
       password: 'password',
       passwordConfirm: 'password',
@@ -75,7 +80,8 @@ it(`returns status 201 on POST /api/v1/users
   const response = await request(app)
     .post('/api/v1/users')
     .send({
-      name: 'valid name',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'valid@email.com',
       password: 'password',
       passwordConfirm: 'password',
@@ -93,7 +99,8 @@ it('sets a cookie after successful signup', async () => {
   const response = await request(app)
     .post('/api/v1/users')
     .send({
-      name: 'valid name',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'valid@email.com',
       password: 'password',
       passwordConfirm: 'password',
@@ -118,7 +125,8 @@ it('fails when email that does not exist is supplied POST /api/v1/users/login', 
 it('fails when incorrect password is supplied POST /api/v1/users/login', async () => {
   const user = User.build({
     email: 'test@test.com',
-    name: 'valid name',
+    firstName: 'John',
+    lastName: 'Doe',
     password: 'password',
   });
 
@@ -136,7 +144,8 @@ it('fails when incorrect password is supplied POST /api/v1/users/login', async (
 it('respond with a cookie when given valid credentials POST /api/v1/users/login', async () => {
   const user = User.build({
     email: 'test@test.com',
-    name: 'valid name',
+    firstName: 'John',
+    lastName: 'Doe',
     password: 'password',
   });
 
@@ -159,7 +168,8 @@ it('clears the cookie after signing out POST /api/v1/users/logout', async () => 
   await request(app)
     .post('/api/v1/users')
     .send({
-      name: 'valid name',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'test@test.com',
       password: 'password',
       passwordConfirm: 'password',
@@ -192,7 +202,8 @@ it(`returns status 200 if provided with valid email
   const newUser = User.build({
     email: 'valid@email.com',
     password: 'password',
-    name: 'valid name',
+    firstName: 'John',
+    lastName: 'Doe',
   });
 
   await newUser.save();

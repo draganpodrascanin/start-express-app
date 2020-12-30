@@ -1,83 +1,76 @@
-const User = require('../models/User.js');
-const catchAsync = require('../utils/catchAsync');
-const AppError = require('../utils/AppError');
-const factory = require('./handlerFactory');
+import User from '../models/User.js';
+import CustomError from '../utils/CustomError';
+import factory from './handlerFactory';
 
-/* 
-    middleware, find user from slug
-    and connect him to req obj
-*/
+class UserController {
+	//helper method to filter object of unwanted fields
+	filterObj = (obj, ...allowedFields) => {
+		const newObj = {};
 
-//
-exports.getMe = (req, res, next) => {
-  req.params.id = req.user.id;
-  console.log('bude ovde');
-  next();
-};
+		Object.keys(obj).forEach((el) => {
+			if (allowedFields.includes(el)) {
+				newObj[el] = obj[el];
+			}
+		});
 
-//helper funciton to filter object of unwanted fields
-const filterObj = (obj, ...allowedFields) => {
-  const newObj = {};
+		return newObj;
+	};
 
-  Object.keys(obj).forEach(el => {
-    if (allowedFields.includes(el)) {
-      newObj[el] = obj[el];
-    }
-  });
-
-  return newObj;
-};
-
-/*
+	/*
     update user, can't be used for updating password
     only for email and name, you can modify it as you please
 */
-exports.updateMe = catchAsync(async (req, res, next) => {
-  // 1) Create error if user POSTs password data
-  if (req.body.password || req.body.passwordConfirm) {
-    return next(
-      new AppError(
-        'This route is not for password updates. Please use proper way for updating password.',
-        400
-      )
-    );
-  }
+	updateMe = async (req, res, next) => {
+		// 1) Create error if user POSTs password data
+		if (req.body.password || req.body.passwordConfirm) {
+			throw new CustomError(
+				'This route is not for password updates. Please use proper way for updating password.',
+				400
+			);
+		}
 
-  // 2) Filtered out unwanted fields names that are not allowed to be updated
-  const filteredBody = filterObj(req.body, 'name', 'email');
+		// 2) Filtered out unwanted fields names that are not allowed to be updated
+		const filteredBody = this.filterObj(req.body, 'name', 'email');
 
-  // 3) Update user document
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
-    new: true,
-    runValidators: true
-  });
+		// 3) Update user document
+		const updatedUser = await User.findByIdAndUpdate(
+			req.user.id,
+			filteredBody,
+			{
+				new: true,
+				runValidators: true,
+			}
+		);
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      user: updatedUser
-    }
-  });
-});
+		res.status(200).json({
+			status: 'success',
+			data: {
+				user: updatedUser,
+			},
+		});
+	};
 
-//make current user inactive i.e. deleting him for all clients
-exports.deleteMe = catchAsync(async (req, res, next) => {
-  await User.findByIdAndUpdate(req.user.id, { active: false });
+	//make current user inactive i.e. deleting him for all clients
+	deleteMe = async (req, res, next) => {
+		await User.findByIdAndUpdate(req.user.id, { active: false });
 
-  res.status(204).json({
-    status: 'success',
-    data: null
-  });
-});
+		res.status(204).json({
+			status: 'success',
+			data: null,
+		});
+	};
 
-//get one user from slug
-exports.getUser = factory.getOne(User);
-//get all users can be filtered by query string
-exports.getAllUsers = factory.getAll(User);
+	//get one user from slug
+	getUser = factory.getOne(User);
+	//get all users can be filtered by query string
+	getAllUsers = factory.getAll(User);
 
-// Do NOT update passwords with this!
-//update user that id matches the slug
-exports.updateUser = factory.updateOne(User);
+	// Do NOT update passwords with this!
+	//update user that id matches the slug
+	updateUser = factory.updateOne(User);
 
-//delete user that matches the slug
-exports.deleteUser = factory.deleteOne(User);
+	//delete user that matches the slug
+	deleteUser = factory.deleteOne(User);
+}
+
+export default new UserController();

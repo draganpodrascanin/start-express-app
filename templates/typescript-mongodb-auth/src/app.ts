@@ -4,12 +4,12 @@ import cookieParser from 'cookie-parser';
 import 'express-async-errors';
 import path from 'path';
 import viewsRoutes from './routes/viewsRoutes';
-import { NotFound404ViewController } from './controllers/viewsController';
+import viewsController from './controllers/viewsController';
 
 const app = express();
 
 import userRouter from './routes/userRouter';
-import { errorController } from './controllers/errorController';
+import errorController from './controllers/errorController';
 
 app.set('view engine', 'pug');
 //setting views
@@ -28,7 +28,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/', viewsRoutes);
 
 //404
-app.use('*', NotFound404ViewController);
+app.use('*', viewsController.NotFound404);
 
 app.use(errorController);
 

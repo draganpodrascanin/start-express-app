@@ -1,18 +1,60 @@
-{
-	"type": "mysql",
-	"host": "localhost",
-	"port": 3306,
-	"username": "test",
-	"password": "test",
-	"database": "test",
-	"synchronize": true,
-	"logging": false,
-	"entities": ["src/entity/**/*.ts"],
-	"migrations": ["src/migration/**/*.ts"],
-	"subscribers": ["src/subscriber/**/*.ts"],
-	"cli": {
-		"entitiesDir": "src/entity",
-		"migrationsDir": "src/migration",
-		"subscribersDir": "src/subscriber"
+[
+	{
+		"name": "development",
+		"type": "mysql",
+		"host": "test",
+		"port": 3306,
+		"username": "user",
+		"password": "password",
+		"database": "database_test",
+		"logging": false,
+		"synchronize": true,
+		"entities": ["src/entity/**/*.ts"],
+		"migrations": ["src/migration/**/*.ts"],
+		"subscribers": ["src/subscriber/**/*.ts"],
+		"cli": {
+			"entitiesDir": "src/entity",
+			"migrationsDir": "src/migration",
+			"subscribersDir": "src/subscriber"
+		}
+	},
+	{
+		"name": "test",
+		"type": "mysql",
+		"host": "test",
+		"port": 3306,
+		"username": "user",
+		"password": "password",
+		"database": "database_test",
+		"logging": false,
+		"synchronize": true,
+		"migrationsRun": true,
+		"entities": ["src/entity/**/*.ts"],
+		"migrations": ["src/migration/**/*.ts"],
+		"subscribers": ["src/subscriber/**/*.ts"],
+		"cli": {
+			"entitiesDir": "src/entity",
+			"migrationsDir": "src/migration",
+			"subscribersDir": "src/subscriber"
+		}
+	},
+	{
+		"name": "production",
+		"type": "mysql",
+		"host": "test",
+		"port": 3306,
+		"username": "user",
+		"password": "password",
+		"database": "database_prod",
+		"logging": false,
+		"synchronize": true,
+		"entities": ["dist/entity/**/*.js"],
+		"migrations": ["dist/migration/**/*.js"],
+		"subscribers": ["dist/subscriber/**/*.js"],
+		"cli": {
+			"entitiesDir": "src/entity",
+			"migrationsDir": "src/migration",
+			"subscribersDir": "src/subscriber"
+		}
 	}
-}
+]

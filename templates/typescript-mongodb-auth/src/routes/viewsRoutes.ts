@@ -1,25 +1,21 @@
 import { Router } from 'express';
-import {
-  NotFound404ViewController,
-  homeController,
-  showForgotPassword,
-  showLogin,
-  showProfile,
-  showResetPassword,
-  showSignup,
-} from '../controllers/viewsController';
+import viewsController from '../controllers/viewsController';
 
-import { isLoggedIn, protectMiddleware } from '../controllers/authController';
+import authMiddleware from '../middlewares/AuthMiddware';
 
 const router = Router();
 
-router.use(isLoggedIn);
+router.use(authMiddleware.isLoggedIn);
 
-router.route('/').get(homeController);
-router.route('/login').get(showLogin);
-router.route('/signup').get(showSignup);
-router.route('/forgotPassword').get(showForgotPassword);
-router.route('/users/resetpassword/:token').get(showResetPassword);
-router.route('/profile').get(protectMiddleware, showProfile);
+router.route('/').get(viewsController.home);
+router.route('/login').get(viewsController.showLogin);
+router.route('/signup').get(viewsController.showSignup);
+router.route('/forgotPassword').get(viewsController.showForgotPassword);
+router
+  .route('/users/resetpassword/:token')
+  .get(viewsController.showResetPassword);
+router
+  .route('/profile')
+  .get(authMiddleware.protect, viewsController.showProfile);
 
 export default router;

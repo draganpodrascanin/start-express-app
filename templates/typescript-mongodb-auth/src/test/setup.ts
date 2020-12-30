@@ -1,8 +1,6 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import app from '../app';
-import Email from '../utils/Email';
 
 //setting enviroment vars
 dotenv.config({ path: 'config.env' });
