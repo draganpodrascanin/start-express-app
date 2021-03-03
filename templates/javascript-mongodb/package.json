@@ -23,7 +23,7 @@
 		"mongoose": "^5.10.3",
 		"ndb": "^1.1.5",
 		"nodemailer": "^6.4.11",
-		"pug": "^3.0.0",
+		"pug": "^3.0.1",
 		"validator": "^13.1.1"
 	},
 	"devDependencies": {},
