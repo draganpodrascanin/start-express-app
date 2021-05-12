@@ -22,7 +22,7 @@
 		"html-to-text": "^5.1.1",
 		"mongoose": "^5.10.3",
 		"ndb": "^1.1.5",
-		"nodemailer": "^6.4.11",
+		"nodemailer": "^6.4.16",
 		"pug": "^3.0.0",
 		"validator": "^13.1.1"
 	},
