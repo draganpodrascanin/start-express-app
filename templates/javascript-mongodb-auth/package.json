@@ -29,7 +29,7 @@
 		"mongoose": "^5.10.3",
 		"morgan": "^1.10.0",
 		"ndb": "^1.1.5",
-		"nodemailer": "^6.4.11",
+		"nodemailer": "^6.4.16",
 		"pug": "^2.0.4",
 		"validator": "^11.1.0",
 		"xss-clean": "^0.1.1"
